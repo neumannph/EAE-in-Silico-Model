@@ -6,10 +6,10 @@ using namespace std;
 void ParametersInitializer() {
 
     params.microglia = 350.0, // cells/mm²       // average microglia density                     
-    params.lambda = 14.0e-4,  // mm²/cells*min   // production rate of microglia   
-    params.beta = 0.8e-1,     // pg/cells*min,   // cytokine production rate per microglia               
-    params.alpha = 2.3e-1,    // min^-1          // cytokine decay rate                                  
     params.oligod = 400.0,    // cells/mm²       // average oligodendrocyte density                             
+    params.lambda = 1.4e-3,   // mm²/cells*min   // production rate of microglia   
+    params.beta = 8.0e-2,     // pg/cells*min,   // cytokine production rate per microglia               
+    params.alpha = 2.3e-1,    // min^-1          // cytokine decay rate                                  
     params.gamma = 5.0e-2;    // estimated       // cytokine-induced oligodendrocyte damage
 }
 
