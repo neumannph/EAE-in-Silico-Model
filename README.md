@@ -4,16 +4,16 @@ Este repositório apresenta uma simulação in silico da Encefalomielite Autoimu
 
 Fundamentação Teórica
 
-O modelo é baseado em um sistema de Equações Diferenciais Ordinárias (EDOs) fundamentado no trabalho de Lombardo et al. (2017), que descreve a quimiotaxia e a ativação celular. Biologicamente, a simulação mimetiza o processo descrito por Da Silva et al. (2020), onde a imunização contra proteínas da superfície da mielina — especificamente a glicoproteína MOG — desencadeia uma cascata inflamatória mediada por células T e micróglias.
+O modelo é baseado em um sistema de Equações Diferenciais Ordinárias (EDOs) fundamentado no trabalho de Lombardo et al. (2017), que descreve a quimiotaxia e a ativação celular. Biologicamente, a simulação mimetiza o processo descrito por Da Silva et al. (2020), onde a imunização contra proteínas da mielina — especificamente a MOG (Myelin Oligodendrocyte Glycoprotein) — desencadeia uma cascata inflamatória mediada por células T e micróglias.
 
 Dinâmica Populacional e Variáveis
 
 O código resolve numericamente as interações entre três componentes principais ao longo de um período de 21 dias:
-    Densidade de Micróglias ($m$): Células residentes que, ao serem ativadas, iniciam a resposta inflamatória.
-    Concentração de Citocinas ($c$): Sinalizadores químicos pró-inflamatórios responsáveis pela propagação do dano.
-    Densidade de Oligodendrócitos ($d$): Células produtoras de mielina que sofrem declínio populacional (apoptose) devido à inflamação.
+    Densidade de Micróglias ($M$): Células residentes que, ao serem ativadas, iniciam a resposta inflamatória.
+    Concentração de Citocinas ($C$): Sinalizadores químicos pró-inflamatórios responsáveis pela propagação do dano.
+    Densidade de Oligodendrócitos ($D$): Células produtoras de mielina que sofrem declínio populacional devido à inflamação.
 
-A simulação parte de condições fisiológicas basais, onde a concentração inicial de citocinas é nula ($c(0) = 0,0$) e as densidades celulares seguem os padrões de equilíbrio tecidual estabelecidos na literatura ($350$ $mm^{-2}$ para micróglias e $400$ $mm^{-2}$ para oligodendrócitos).
+A simulação parte de condições fisiológicas basais, onde a concentração inicial de citocinas é nula e as densidades celulares seguem os padrões de equilíbrio tecidual estabelecidos na literatura ($100$ $cel \cdot mm^{-2}$ para micróglias e $400$ $cel \cdot mm^{-2}$ para oligodendrócitos).
 
 Implementação Técnica
 
