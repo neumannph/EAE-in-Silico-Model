@@ -1,6 +1,6 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
-#define NUM_VAR 3
+#define NUM_VAR 4
 
 #include <fstream>
 
@@ -10,7 +10,11 @@ typedef struct parameters {
     double beta;        // cytokine production rate per microglia       
     double lambda;      // production rate of microglia (activated macrophages*)     
     double alpha;       // cytokine decay rate                       
-    double gamma;        // cytokine-induced oligodendrocyte damage
+    double gamma;       // cytokine-induced oligodendrocyte damage
+    double teste1;
+    double teste2;
+    double teste3;
+    
 }parameters;
 
 extern parameters params;

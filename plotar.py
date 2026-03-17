@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 
 nome_arquivo = 'Dados.csv'
-colunas = ['Tempo', 'Células Iba-1+ (micróglias)', 'Citocinas Pró-Inflamatórias', 'Oligodendrócitos']
+colunas = ['Tempo', 'Células Iba-1+ (micróglias)', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias']
 
 try:
     df = pd.read_csv(nome_arquivo, sep=r'\s+', header=None)
@@ -25,27 +25,35 @@ plt.rcParams.update({
 
 # Plotagem 
 
-plt.figure(figsize=(16, 9)) 
+fig, ax = plt.subplots(1,2, figsize = (12, 5))
 
 # Plota as Células Iba-1+ (micróglias)
-plt.plot(df['Tempo'], df['Células Iba-1+ (micróglias)'], label='Células Iba-1+ (micróglias)', linewidth=3)
-
-# Plota as Citocinas Pró-Inflamatórias
-plt.plot(df['Tempo'], df['Citocinas Pró-Inflamatórias'], label='Citocinas Pró-Inflamatórias', linewidth=3)
+ax[0].plot(df['Tempo'], df['Células Iba-1+ (micróglias)'], label='Células Iba-1+ (micróglias)', linewidth=3, color = 'tab:red')
 
 # Plota os Oligodendrócitos
-plt.plot(df['Tempo'], df['Oligodendrócitos'], label='Oligodendrócitos', linewidth=3)
-
+ax[0].plot(df['Tempo'], df['Oligodendrócitos'], label='Oligodendrócitos', linewidth=3, color = 'tab:green')
 
 # Configurações Visuais
-plt.title('Simulação gráfica do sistema de equações', fontsize = 27, fontweight='bold', pad=20)
-plt.xlabel('Tempo (dias)', fontsize = 27, fontweight='bold', labelpad = 15)
-plt.ylabel('Densidade / Concentração', fontsize = 27, fontweight='bold', labelpad = 20)
-plt.grid(True, linestyle='--', alpha=0.9) 
-plt.legend(fontsize = 25) 
-plt.yticks(fontsize = 25)
-plt.xticks(fontsize = 25)
-plt.tight_layout()
+ax[0].set_title('Simulação gráfica do sistema de equações', fontsize = 11, fontweight='bold')
+ax[0].set_xlabel('Tempo (dias)', fontsize = 11, fontweight='bold')
+ax[0].set_ylabel('Densidade', fontsize = 11, fontweight='bold')
+ax[0].grid(True) 
+ax[0].legend(fontsize = 13) 
+ax[0].tick_params(labelsize = 13)
+
+# Plota as Citocinas Pró-Inflamatórias
+ax[1].plot(df['Tempo'], df['Citocinas Pró-Inflamatórias'], label='Citocinas Pró-Inflamatórias', linewidth=3, color = 'tab:orange')
+
+# Plota as Citocinas Anti-Inflamatórias
+ax[1].plot(df['Tempo'], df['Citocinas Anti-Inflamatórias'], label='Citocinas Anti-Inflamatórias', linewidth=3, color = 'tab:blue')
+
+# Configurações Visuais
+ax[1].set_title('Simulação gráfica do sistema de equações', fontsize = 11, fontweight='bold')
+ax[1].set_xlabel('Tempo (dias)', fontsize = 11, fontweight='bold')
+ax[1].set_ylabel('Concentração', fontsize = 11, fontweight='bold')
+ax[1].grid(True) 
+ax[1].legend(fontsize = 13) 
+ax[1].tick_params(labelsize = 13)
 
 plt.tight_layout() 
 plt.savefig('gráfico.jpg') 
