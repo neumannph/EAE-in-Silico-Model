@@ -35,31 +35,31 @@ void euler(double *x, double dt) {
 }
 
 void calculate_derivatives(double *current_x, double *dxdt) {
-    double M = current_x[0]; // M = density of microglias
-    double O = current_x[1]; // O = density of oligodendrocytes
+    double M = current_x[0];  // M = density of microglias
+    double O = current_x[1];  // O = density of oligodendrocytes
     double CP = current_x[2]; // C = concentration of pro-inflamatory cytokines
     double CA = current_x[3]; // C = concentration of anti-inflamatory cytokines
 
     //microglia
-    dxdt[0] = params.lambda * M * (params.microglia - M) - params.teste1 * CA;
+    dxdt[0] = params.lambda * M * (params.microglia - M) - params.ni * CA;
     
     //oligodendrocyte
-    dxdt[1] = ((params.oligod - O)/params.oligod) - params.gamma * CP; 
+    dxdt[1] = params.lambda * O * (params.oligod - O) - params.gamma * CP; 
 
     //pro-inflamatory cytokines
-    dxdt[2] = params.beta * M - params.alpha * CP * ((params.oligod - O) / params.oligod);
+    dxdt[2] = params.beta * M - params.alpha * CP;
 
     //anti-inflamatory cytokines
-    dxdt[3] = params.teste2 * CP - params.teste3 * O;//((params.oligod - O) / params.oligod);
+    dxdt[3] = params.mi * CP - params.kappa * CA;
 }
 
 void writeFile(double *x, double t, ofstream &file) {
     // PRINT MODEL: TIME   MICROGLIA   CYTOKINES   OLIGODENDROCITES
     file << fixed << setprecision(3);
-    file << t << "   ";        // Time
-    file << x[0] << "   ";     // Microglia
-    file << x[1] << "   ";      // Oligodendrocyte     
-    file << x[2] << "   ";     // Pro-Inflamatory Cytokines
+    file << t << "   ";       // Time
+    file << x[0] << "   ";    // Microglia
+    file << x[1] << "   ";    // Oligodendrocyte     
+    file << x[2] << "   ";    // Pro-Inflamatory Cytokines
     file << x[3] << "\n";     // Anti-Inflamatory Cytokines
 }
 

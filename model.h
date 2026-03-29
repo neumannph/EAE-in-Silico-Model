@@ -5,15 +5,15 @@
 #include <fstream>
 
 typedef struct parameters {
-    double microglia;   // average microglia density (macrophages density*)                 
+    double microglia;   // average microglia density               
     double oligod;      // average oligodendrocyte density              
     double beta;        // cytokine production rate per microglia       
-    double lambda;      // production rate of microglia (activated macrophages*)     
-    double alpha;       // cytokine decay rate                       
-    double gamma;       // cytokine-induced oligodendrocyte damage
-    double teste1;
-    double teste2;
-    double teste3;
+    double lambda;      // production rate of microglia    
+    double alpha;       // pro-inflamatory cytokine decay rate                       
+    double gamma;       // pro-inflamatory cytokine-induced oligodendrocyte damage
+    double ni;          // microglia decay rate                 
+    double mi;          // anti-inflamatory cytokine production rate
+    double kappa;       // anti-inflamatory cytokine decay rate 
     
 }parameters;
 
