@@ -8,22 +8,12 @@ typedef struct parameters {
     double microglia;   // average microglia density               
     double oligod;      // average oligodendrocyte density              
     double beta;        // cytokine production rate per microglia       
-<<<<<<< HEAD
     double lambda;      // production rate of microglia    
     double alpha;       // pro-inflamatory cytokine decay rate                       
     double gamma;       // pro-inflamatory cytokine-induced oligodendrocyte damage
     double ni;          // microglia decay rate                 
     double mi;          // anti-inflamatory cytokine production rate
-    double kappa;       // anti-inflamatory cytokine decay rate 
-=======
-    double lambda;      // production rate of microglia (activated macrophages*)     
-    double alpha;       // cytokine decay rate                       
-    double gamma;       // cytokine-induced oligodendrocyte damage
-    double ni;
-    double mi;
-    double kappa;
->>>>>>> 0fea1a082351b09dedac81d2c2fc24a3118f9f6f
-    
+    double kappa;       // anti-inflamatory cytokine decay rate   
 }parameters;
 
 extern parameters params;

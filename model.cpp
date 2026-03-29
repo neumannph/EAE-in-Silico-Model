@@ -47,11 +47,7 @@ void calculate_derivatives(double *current_x, double *dxdt) {
     dxdt[1] = params.lambda * O * (params.oligod - O) - params.gamma * CP; 
 
     //pro-inflamatory cytokines
-<<<<<<< HEAD
     dxdt[2] = params.beta * M - params.alpha * CP;
-=======
-    dxdt[2] = params.beta * M - params.alpha * CP;// * ((params.oligod - O) / params.oligod);
->>>>>>> 0fea1a082351b09dedac81d2c2fc24a3118f9f6f
 
     //anti-inflamatory cytokines
     dxdt[3] = params.mi * CP - params.kappa * CA;
