@@ -11,9 +11,9 @@ typedef struct parameters {
     double lambda;      // production rate of microglia (activated macrophages*)     
     double alpha;       // cytokine decay rate                       
     double gamma;       // cytokine-induced oligodendrocyte damage
-    double teste1;
-    double teste2;
-    double teste3;
+    double ni;
+    double mi;
+    double kappa;
     
 }parameters;
 
