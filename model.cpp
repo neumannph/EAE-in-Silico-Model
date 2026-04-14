@@ -86,7 +86,7 @@ void calculate_derivatives(double *current_x, double *dxdt) {
     dxdt[2] = params.beta * M - params.alpha * CA;
     
     //anti-inflamatory cytokines
-    dxdt[3] = params.mi * M - params.kappa * CP;
+    dxdt[3] = params.mi * CP - params.kappa * CA;
 }
 
 void writeFile(double *x, double t, ofstream &file) {
