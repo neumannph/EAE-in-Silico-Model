@@ -35,8 +35,8 @@ ax[0].plot(df['Tempo'], df['Oligodendrócitos'], label='Oligodendrócitos', line
 
 # Configurações Visuais
 ax[0].set_title('Simulação gráfica do sistema de equações', fontsize = 11, fontweight='bold')
-ax[0].set_xlabel('Tempo (dias)', fontsize = 11, fontweight='bold')
-ax[0].set_ylabel('Densidade', fontsize = 11, fontweight='bold')
+ax[0].set_xlabel('Tempo (min)', fontsize = 11, fontweight='bold')
+ax[0].set_ylabel('Densidade (cells/mm²)', fontsize = 11, fontweight='bold')
 ax[0].grid(True) 
 ax[0].legend(fontsize = 13) 
 ax[0].tick_params(labelsize = 13)
@@ -49,8 +49,8 @@ ax[1].plot(df['Tempo'], df['Citocinas Anti-Inflamatórias'], label='Citocinas An
 
 # Configurações Visuais
 ax[1].set_title('Simulação gráfica do sistema de equações', fontsize = 11, fontweight='bold')
-ax[1].set_xlabel('Tempo (dias)', fontsize = 11, fontweight='bold')
-ax[1].set_ylabel('Concentração', fontsize = 11, fontweight='bold')
+ax[1].set_xlabel('Tempo (min)', fontsize = 11, fontweight='bold')
+ax[1].set_ylabel('Concentração (pg/mm²)', fontsize = 11, fontweight='bold')
 ax[1].grid(True) 
 ax[1].legend(fontsize = 13) 
 ax[1].tick_params(labelsize = 13)

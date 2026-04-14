@@ -4,7 +4,7 @@
 
 #include <fstream>
 
-typedef struct parameters {
+struct parameters {
     double microglia;   // average microglia density               
     double oligod;      // average oligodendrocyte density              
     double beta;        // cytokine production rate per microglia       
@@ -14,11 +14,14 @@ typedef struct parameters {
     double ni;          // microglia decay rate                 
     double mi;          // anti-inflamatory cytokine production rate
     double kappa;       // anti-inflamatory cytokine decay rate   
-}parameters;
+    double p;           // production rate of oligodendrocyte
+};
 
 extern parameters params;
 
 void euler(double *x, double dt);
+
+void rk4(double *x, double dt);
 
 void calculate_derivatives(double *current_x, double *dxdt);
 
