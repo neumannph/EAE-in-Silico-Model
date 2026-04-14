@@ -34,8 +34,8 @@ ax[0].plot(df['Tempo'], df['Células Iba-1+ (micróglias)'], label='Células Iba
 ax[0].plot(df['Tempo'], df['Oligodendrócitos'], label='Oligodendrócitos', linewidth=3, color = 'tab:green')
 
 # Configurações Visuais
-ax[0].set_title('Simulação gráfica do sistema de equações', fontsize = 11, fontweight='bold')
-ax[0].set_xlabel('Tempo (min)', fontsize = 11, fontweight='bold')
+ax[0].set_title('Microglia e Oligodendrócito', fontsize = 11, fontweight='bold')
+ax[0].set_xlabel('Tempo (dias)', fontsize = 11, fontweight='bold')
 ax[0].set_ylabel('Densidade (cells/mm²)', fontsize = 11, fontweight='bold')
 ax[0].grid(True) 
 ax[0].legend(fontsize = 13) 
@@ -48,9 +48,9 @@ ax[1].plot(df['Tempo'], df['Citocinas Pró-Inflamatórias'], label='Citocinas Pr
 ax[1].plot(df['Tempo'], df['Citocinas Anti-Inflamatórias'], label='Citocinas Anti-Inflamatórias', linewidth=3, color = 'tab:blue')
 
 # Configurações Visuais
-ax[1].set_title('Simulação gráfica do sistema de equações', fontsize = 11, fontweight='bold')
-ax[1].set_xlabel('Tempo (min)', fontsize = 11, fontweight='bold')
-ax[1].set_ylabel('Concentração (pg/mm²)', fontsize = 11, fontweight='bold')
+ax[1].set_title('Citocinas Pró e Anti-inflamatórias', fontsize = 11, fontweight='bold')
+ax[1].set_xlabel('Tempo (dias)', fontsize = 11, fontweight='bold')
+ax[1].set_ylabel('Concentração (pg/ml)', fontsize = 11, fontweight='bold')
 ax[1].grid(True) 
 ax[1].legend(fontsize = 13) 
 ax[1].tick_params(labelsize = 13)
