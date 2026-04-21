@@ -2,16 +2,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np 
 
-nome_arquivo = 'Dados.csv'
+arquivo = 'dados.csv'
 colunas = ['Tempo', 'Células Iba-1+ (micróglias)', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias']
 
 try:
-    df = pd.read_csv(nome_arquivo, sep=r'\s+', header=None)
+    df = pd.read_csv(arquivo, sep=r',', header=0, names=colunas)
     
     df.columns = colunas
     
 except FileNotFoundError:
-    print(f"Erro: Arquivo '{nome_arquivo}' não encontrado.")
+    print(f"Erro: Arquivo '{arquivo}' não encontrado.")
     exit()
 except Exception as e:
     print(f"Erro ao ler o arquivo: {e}")

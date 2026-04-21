@@ -7,7 +7,7 @@ using namespace std;
 parameters params;
 
 void run_simulation (double *x, double dt, double t_final) {
-    ofstream file("Dados.csv");
+    ofstream file("dados.csv");
 
     if (!file.is_open()) {
         cerr << "ERRO AO ABRIR O ARQUIVO" << endl;
@@ -27,7 +27,6 @@ void run_simulation (double *x, double dt, double t_final) {
     file.close();
 }
 
-// y(k+1) = yk + dt * dxdt;
 void euler(double *x, double dt) {
     double dxdt[NUM_VAR];
 
@@ -92,9 +91,9 @@ void calculate_derivatives(double *current_x, double *dxdt) {
 void writeFile(double *x, double t, ofstream &file) {
     // PRINT MODEL: TIME   MICROGLIA   CYTOKINES   OLIGODENDROCITES
     file << fixed << setprecision(3);
-    file << t << "   ";       // Time
-    file << x[0] << "   ";    // Microglia
-    file << x[1] << "   ";    // Oligodendrocyte     
-    file << x[2] << "   ";    // Pro-Inflamatory Cytokines
+    file << t << ",";       // Time
+    file << x[0] << ",";    // Microglia
+    file << x[1] << ",";    // Oligodendrocyte     
+    file << x[2] << ",";    // Pro-Inflamatory Cytokines
     file << x[3] << "\n";     // Anti-Inflamatory Cytokines
 }
