@@ -6,14 +6,14 @@ using namespace std;
 void ParametersInitializer() {
     params.microglia = 350.0; // cells/mm²          // average microglia density                     
     params.oligod = 400.0;    // cells/mm²          // average oligodendrocyte density                             
-    params.lambda = 7.0e-1;   // mm²/cells*dia      // production rate of microglia
-    params.ni = 1.2e-1;       // cells/pg*ml       // microglia decay rate (estimated)
-    params.p = 10.5e-2;       // mm²/cells*dia      // production rate of oligodendrocyte
-    params.gamma = 1.9e-2;    // cells/?*dia       // pro-inflamatory cytokine-induced oligodendrocyte damage (estimated)
-    params.beta = 1.25e-1;    // pg/cells*dia,      // pro-inflamatory cytokine production rate per microglia               
-    params.alpha = 5.45e-2;   // dia^-1             // pro-inflamatory cytokine decay rate                                  
-    params.mi = 1.1e-1;       // dia^-1             // anti-inflamatory cytokine production rate (estimated)
-    params.kappa = 1.0e-1;    // dia^-1             // anti-inflamatory cytokine decay rate (estimated)
+    params.lambda = 4.3e-1;   // mm²/cells*dia      // production rate of microglia
+    params.ni = 2.3e-2;       // cells/pg*ml       // microglia decay rate (estimated)
+    params.p = 6.5e-1;       // mm²/cells*dia      // production rate of oligodendrocyte
+    params.gamma = 4.0e-2;    // cells/?*dia       // pro-inflamatory cytokine-induced oligodendrocyte damage (estimated)
+    params.beta = 6.8e-1;    // pg/cells*dia,      // pro-inflamatory cytokine production rate per microglia               
+    params.alpha = 9.45e-2;   // dia^-1             // pro-inflamatory cytokine decay rate                                  
+    params.mi = 3.2e-1;       // dia^-1             // anti-inflamatory cytokine production rate (estimated)
+    params.kappa = 2.5e-1;    // dia^-1             // anti-inflamatory cytokine decay rate (estimated)
 }
 
 int main() { 
@@ -25,7 +25,7 @@ int main() {
     //     x[4]       = (M[0], O[0], CP[0], CA[0])
     double x[NUM_VAR] = {100.0, 400.0, 198.0, 392.0};
 
-    double t_final = 80; // TIME INTERVAL
+    double t_final = 50; // TIME INTERVAL
     double dt = 0.01;    // STEP SIZE
 
     // STARTS THE SIMULATION

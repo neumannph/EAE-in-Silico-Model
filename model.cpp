@@ -15,9 +15,10 @@ void run_simulation (double *x, double dt, double t_final) {
     }
 
     double t = 0.0;
-    writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN Dados.csv
+    file << "tempo,microglia,oligodendrocytes,citocinaPro,citocinaAnti\n"; // HEADER OF THE CSV FILE
+    writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN dados.csv
     
-    //PRINT EACH DATA IN Dados.csv
+    //PRINT EACH DATA IN dados.csv
     while (t < t_final) {
         euler(x, dt);
         //rk4(x, dt);
