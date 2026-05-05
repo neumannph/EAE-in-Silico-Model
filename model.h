@@ -2,6 +2,7 @@
 #define _MODEL_H_
 #define NUM_VAR 4
 
+#include <iostream>
 #include <fstream>
 
 struct parameters {
