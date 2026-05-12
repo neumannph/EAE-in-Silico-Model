@@ -1,6 +1,5 @@
 *.exe
-
 .vscode/
-
 *.jpg
 *.csv
+*.bat
