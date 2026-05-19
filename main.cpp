@@ -9,10 +9,10 @@ void ParametersInitializer() {
     params.ni = 3.0e-2;       // cells/mm²*dia        // microglia decay rate (estimated)
     params.p = 6.5e-1;        // dia^-1               // production rate of oligodendrocyte
     params.gamma = 3.7e-2;    // cells*ml/mm²*pg*dia  // pro-inflamatory cytokine-induced oligodendrocyte damage (estimated)
-    params.beta = 8.0e-1;     // pg*mm²/ml*cells*dia  // pro-inflamatory cytokine production rate per microglia               
-    params.alpha = 1.2e-1;    // dia^-1               // pro-inflamatory cytokine decay rate                                  
+    params.beta = 8.9e-1;     // pg*mm²/ml*cells*dia  // pro-inflamatory cytokine production rate per microglia               
+    params.alpha = 1.4e-1;    // dia^-1               // pro-inflamatory cytokine decay rate                                  
     params.mi = 4.0e-1;       // dia^-1               // anti-inflamatory cytokine production rate (estimated)
-    params.kappa = 3.0e-1;    // dia^-1               // anti-inflamatory cytokine decay rate (estimated)
+    params.kappa = 3.5e-1;    // dia^-1               // anti-inflamatory cytokine decay rate (estimated)
 }
 
 int main() { 
@@ -24,7 +24,7 @@ int main() {
     //     x[4]       = (M[0], O[0], CP[0], CA[0])
     double x[NUM_VAR] = {20.0, 400.0, 198.0, 392.0};
 
-    double t_final = 30; // TIME INTERVAL
+    double t_final = 58; // TIME INTERVAL (days)
     double dt = 0.01;    // STEP SIZE
 
     // STARTS THE SIMULATION
