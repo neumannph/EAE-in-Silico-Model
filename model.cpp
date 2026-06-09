@@ -15,7 +15,7 @@ void run_simulation (double *x, double dt, double t_final) {
     }
 
     double t = 0.0;
-    file << "tempo,microglia,oligodendrocytes,citocinaPro,citocinaAnti\n"; // HEADER OF THE CSV FILE
+    file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti\n"; // HEADER OF THE CSV FILE
     writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN dados.csv
     
     //PRINT EACH DATA IN dados.csv
@@ -36,7 +36,7 @@ void euler(double *x, double dt) {
     for(int i = 0; i < NUM_VAR; i++) {
         x[i] = x[i] + dt * dxdt[i];
         if(x[i] <= 0)
-            x[i] = 0.0;        
+            x[i] = 0.0;
     }
 }
 
@@ -71,22 +71,30 @@ void rk4(double *x, double dt) {
 }
 
 void calculate_derivatives(double *current_x, double *dxdt) {
-    double M = current_x[0];  // M = density of microglias (cells/mm²)
-    double O = current_x[1];  // O = density of oligodendrocytes (cells/mm²)
-    double CP = current_x[2]; // CP = concentration of pro-inflamatory cytokines (pg/ml)
-    double CA = current_x[3]; // CA = concentration of anti-inflamatory cytokines (pg/ml)
+    double MB = current_x[0];  // MB = basal density of microglias (cells/mm²)
+    double MA = current_x[1];  // MA = density of activated microglias (cells/mm²)
+    double O = current_x[2];  // O = density of oligodendrocytes (cells/mm²)
+    double CP = current_x[3]; // CP = concentration of pro-inflamatory cytokines (pg/ml)
+    double CA = current_x[4]; // CA = concentration of anti-inflamatory cytokines (pg/ml)
 
     //microglia
-    dxdt[0] = params.lambda * M * (1 - M/params.microglia) - params.ni * CA;
+    //dxdt[0] = MB * (1 - MB/params.microgliaBasal);            //equação de hill
+
+    // dxdt[0] = params.basal * (params.microglia - MB) - ((params.cv1 * MB) / (params.cv2 + MB));
+    dxdt[0] = params.basal * (params.microglia - MB) - params.cv1 * MB;
+    
+    //dxdt[1] = ((params.cv1 * MB) / (params.cv2 + MB)) + params.lambda * MA * (1 - MA/params.microglia) - params.ni * CA);
+    // dxdt[1] = params.cv1 * MB + params.lambda * MA * (1 - MA/params.microglia) - params.ni * CA;
+    dxdt[1] = params.cv1 * MB - params.ni * CA;
     
     //oligodendrocyte
-    dxdt[1] = params.p * O * (1 - O/params.oligod) - params.gamma * CP; 
+    dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * CP; 
 
     //pro-inflamatory cytokines
-    dxdt[2] = params.beta * M - params.alpha * CA;
+    dxdt[3] = params.beta * MA - params.alpha * CA;
     
     //anti-inflamatory cytokines
-    dxdt[3] = params.mi * CP - params.kappa * CA;
+    dxdt[4] = params.mi * CP - params.kappa * CA;
 }
 
 void writeFile(double *x, double t, ofstream &file) {
@@ -94,7 +102,8 @@ void writeFile(double *x, double t, ofstream &file) {
     file << fixed << setprecision(3);
     file << t << ",";       // Time
     file << x[0] << ",";    // Microglia
-    file << x[1] << ",";    // Oligodendrocyte     
-    file << x[2] << ",";    // Pro-Inflamatory Cytokines
-    file << x[3] << "\n";     // Anti-Inflamatory Cytokines
+    file << x[1] << ",";    // Celulas Iba-1+
+    file << x[2] << ",";    // Oligodendrocyte     
+    file << x[3] << ",";    // Pro-Inflamatory Cytokines
+    file << x[4] << "\n";     // Anti-Inflamatory Cytokines
 }

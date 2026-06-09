@@ -1,6 +1,6 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
-#define NUM_VAR 4
+#define NUM_VAR 5
 
 #include <iostream>
 #include <fstream>
@@ -16,6 +16,13 @@ struct parameters {
     double mi;          // anti-inflamatory cytokine production rate
     double kappa;       // anti-inflamatory cytokine decay rate   
     double p;           // production rate of oligodendrocyte
+
+    double microgliaBasal; // initial condition of microglia density
+    double cv1;
+    double cv2;
+    double basal; 
+
+    double epsilon;     // treatment efficacy
 };
 
 extern parameters params;

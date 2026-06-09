@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 
 arquivo = 'dados.csv'
-colunas = ['Tempo', 'Células Iba-1+ (micróglias)', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias']
+colunas = ['Tempo', 'Micróglias', 'Células Iba-1+', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias']
 
 try:
     df = pd.read_csv(arquivo, sep=r',', header=0, names=colunas)
@@ -23,12 +23,49 @@ plt.rcParams.update({
     'font.serif': ['Times New Roman'],
 })
 
+print("============= PICOS =============")
+
+tempo = df['Tempo'].to_numpy()
+microglias = df['Micróglias'].to_numpy()
+celulasIba1 = df['Células Iba-1+'].to_numpy()
+oligodendrocitos = df['Oligodendrócitos'].to_numpy()
+citocinaPro = df['Citocinas Pró-Inflamatórias'].to_numpy()
+citocinaAnti = df['Citocinas Anti-Inflamatórias'].to_numpy()
+
+# Microglias
+valorPico = np.max(microglias)
+indicePico = np.argmax(microglias)
+tempoPico = tempo[indicePico]
+print(f"Microglias: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
+
+# Celulas Iba-1+
+valorPico = np.max(celulasIba1)
+indicePico = np.argmax(celulasIba1)
+tempoPico = tempo[indicePico]
+print(f"Celulas Iba1+: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
+
+# Citocinas Pró-Inflamatórias
+valorPico = np.max(citocinaPro)
+indicePico = np.argmax(citocinaPro)
+tempoPico = tempo[indicePico]
+print(f"Citocinas Pró-Inflamatórias: {valorPico} pg/ml - Tempo: {tempoPico} dias")
+
+# Citocinas Anti-Inflamatórias
+valorPico = np.max(citocinaAnti)
+indicePico = np.argmax(citocinaAnti)
+tempoPico = tempo[indicePico]
+print(f"Citocinas Anti-Inflamatórias: {valorPico} pg/ml - Tempo: {tempoPico} dias")
+
+
 # Plotagem 
 
 fig, ax = plt.subplots(1,2, figsize = (12, 5))
 
 # Plota as Células Iba-1+ (micróglias)
-ax[0].plot(df['Tempo'], df['Células Iba-1+ (micróglias)'], label='Células Iba-1+ (micróglias)', linewidth=3, color = 'tab:red')
+ax[0].plot(df['Tempo'], df['Micróglias'], label='Micróglias', linewidth=3, color = 'tab:purple')
+
+# Plota as Células Iba-1+ (micróglias)
+ax[0].plot(df['Tempo'], df['Células Iba-1+'], label='Células Iba-1+', linewidth=3, color = 'tab:red')
 
 # Plota os Oligodendrócitos
 ax[0].plot(df['Tempo'], df['Oligodendrócitos'], label='Oligodendrócitos', linewidth=3, color = 'tab:green')
@@ -43,6 +80,9 @@ ax[0].tick_params(labelsize = 13)
 
 # Plota as Citocinas Pró-Inflamatórias
 ax[1].plot(df['Tempo'], df['Citocinas Pró-Inflamatórias'], label='Citocinas Pró-Inflamatórias', linewidth=3, color = 'tab:orange')
+
+ax[1].plot(19, 800, label='Pró', marker = '*', color = 'orange', markersize = 15)
+ax[1].plot(21, 1000, label='Anti', marker = '*', color = 'blue', markersize = 15)
 
 # Plota as Citocinas Anti-Inflamatórias
 ax[1].plot(df['Tempo'], df['Citocinas Anti-Inflamatórias'], label='Citocinas Anti-Inflamatórias', linewidth=3, color = 'tab:blue')
