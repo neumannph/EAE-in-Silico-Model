@@ -81,7 +81,7 @@ void calculate_derivatives(double *current_x, double *dxdt) {
     //dxdt[0] = MB * (1 - MB/params.microgliaBasal);            //equação de hill
 
     // dxdt[0] = params.basal * (params.microglia - MB) - ((params.cv1 * MB) / (params.cv2 + MB));
-    dxdt[0] = params.basal * (params.microglia - MB) - params.cv1 * MB;
+    dxdt[0] = params.basal * (params.microglia - MA) - params.cv1 * MB;
     
     //dxdt[1] = ((params.cv1 * MB) / (params.cv2 + MB)) + params.lambda * MA * (1 - MA/params.microglia) - params.ni * CA);
     // dxdt[1] = params.cv1 * MB + params.lambda * MA * (1 - MA/params.microglia) - params.ni * CA;
