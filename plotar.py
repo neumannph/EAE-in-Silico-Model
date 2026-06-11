@@ -44,6 +44,12 @@ indicePico = np.argmax(celulasIba1)
 tempoPico = tempo[indicePico]
 print(f"Celulas Iba1+: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
 
+# Oligodendrócitos
+valorMin = np.min(oligodendrocitos)
+indiceMin = np.argmin(oligodendrocitos)
+tempoMin = tempo[indiceMin]
+print(f"Oligodendrócitos: {valorMin} cells/mm² (valor mínimo) - Tempo: {tempoMin} dias")
+
 # Citocinas Pró-Inflamatórias
 valorPico = np.max(citocinaPro)
 indicePico = np.argmax(citocinaPro)
@@ -81,8 +87,8 @@ ax[0].tick_params(labelsize = 13)
 # Plota as Citocinas Pró-Inflamatórias
 ax[1].plot(df['Tempo'], df['Citocinas Pró-Inflamatórias'], label='Citocinas Pró-Inflamatórias', linewidth=3, color = 'tab:orange')
 
-ax[1].plot(19, 800, label='Pró', marker = '*', color = 'orange', markersize = 15)
-ax[1].plot(21, 1000, label='Anti', marker = '*', color = 'blue', markersize = 15)
+ax[1].plot(21, 790, label='Pró', marker = '*', color = 'orange', markersize = 10)
+ax[1].plot(21, 1730, label='Anti', marker = '*', color = 'blue', markersize = 10)
 
 # Plota as Citocinas Anti-Inflamatórias
 ax[1].plot(df['Tempo'], df['Citocinas Anti-Inflamatórias'], label='Citocinas Anti-Inflamatórias', linewidth=3, color = 'tab:blue')
