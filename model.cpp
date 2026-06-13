@@ -6,8 +6,8 @@ using namespace std;
 
 parameters params;
 
-void run_simulation (double *x, double dt, double t_final) {
-    ofstream file("dados.csv");
+void run_simulation (double *x, double dt, double t_final, const string &file_name) {
+    ofstream file(file_name);
 
     if (!file.is_open()) {
         cerr << "ERRO AO ABRIR O ARQUIVO" << endl;
@@ -73,19 +73,15 @@ void rk4(double *x, double dt) {
 void calculate_derivatives(double *current_x, double *dxdt) {
     double MB = current_x[0];  // MB = basal density of microglias (cells/mm²)
     double MA = current_x[1];  // MA = density of activated microglias (cells/mm²)
-    double O = current_x[2];  // O = density of oligodendrocytes (cells/mm²)
-    double CP = current_x[3]; // CP = concentration of pro-inflamatory cytokines (pg/ml)
-    double CA = current_x[4]; // CA = concentration of anti-inflamatory cytokines (pg/ml)
+    double O  = current_x[2];  // O  = density of oligodendrocytes (cells/mm²)
+    double CP = current_x[3];  // CP = concentration of pro-inflamatory cytokines (pg/ml)
+    double CA = current_x[4];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
 
-    //microglia
-    //dxdt[0] = MB * (1 - MB/params.microgliaBasal);            //equação de hill
-
-    // dxdt[0] = params.basal * (params.microglia - MB) - ((params.cv1 * MB) / (params.cv2 + MB));
-    dxdt[0] = params.basal * (params.microglia - MA) - params.cv1 * MB;
+    //basal microglia
+    dxdt[0] = params.basal * (params.microglia - MB) - params.lambda * MB;
     
-    //dxdt[1] = ((params.cv1 * MB) / (params.cv2 + MB)) + params.lambda * MA * (1 - MA/params.microglia) - params.ni * CA);
-    // dxdt[1] = params.cv1 * MB + params.lambda * MA * (1 - MA/params.microglia) - params.ni * CA;
-    dxdt[1] = params.cv1 * MB - params.ni * CA;
+    //activated microglia 
+    dxdt[1] = params.lambda * MB - params.ni * CA;
     
     //oligodendrocyte
     dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * CP; 
@@ -98,7 +94,7 @@ void calculate_derivatives(double *current_x, double *dxdt) {
 }
 
 void writeFile(double *x, double t, ofstream &file) {
-    // PRINT MODEL: TIME   MICROGLIA   CYTOKINES   OLIGODENDROCITES
+    // PRINT MODEL: TIME   MICROGLIA   CELULAS IBA-1+   CYTOKINES   OLIGODENDROCITES
     file << fixed << setprecision(3);
     file << t << ",";       // Time
     file << x[0] << ",";    // Microglia
