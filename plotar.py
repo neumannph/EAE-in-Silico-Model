@@ -166,7 +166,7 @@ def plotMarkers21Days(ax):
     ax[1].plot(21, 790, marker = '*', color = 'orange', markersize = 10)
     ax[1].plot(21, 1730, marker = '*', color = 'blue', markersize = 10)
 
-# Função para plotar o modelo de 58 dias
+# Função para plotar o modelo 2
 def plotModel2(arquivo):
     colunas = ['Tempo', 'Micróglias Basal', 'Células Iba-1+', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias']
     
@@ -220,26 +220,9 @@ def plotModel2(arquivo):
     plt.savefig('modelo_58_dias.jpg')
 
 
-# Função para plotar os marcadores de 58 dias MOG 100ug
-""" def plotMarkers58Days(ax):
-    ax[1].plot(7, 394, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(10, 208, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(14, 44, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(21, 159, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(58, 292, marker = '*', color = 'blue', markersize = 10)
- """
-# Função para plotar os marcadores de 58 dias MOG 300ug
-""" def plotMarkers58Days(ax):
-    ax[1].plot(7, 249, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(10, 126, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(14, 375, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(21, 161, marker = '*', color = 'blue', markersize = 10)
-    ax[1].plot(58, 192, marker = '*', color = 'blue', markersize = 10)
- """
-
-#print("============= PICOS MODELO 1 =============")
-#printPicosModel1(arquivo)
-#plotModel1(arquivo)
+print("============= PICOS MODELO 1 =============")
+printPicosModel1()
+plotModel1(arquivo)
 
 print("============= PICOS MODELO 2 =============")
 arquivo = 'dadosModelo2.csv'
