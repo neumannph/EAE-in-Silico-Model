@@ -78,10 +78,10 @@ void calculate_derivatives(double *current_x, double *dxdt) {
     double CA = current_x[4];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
 
     //basal microglia
-    dxdt[0] = params.basal * (params.microglia - MB) - params.lambda * MB;
+    dxdt[0] = params.delta * (params.microglia - MB) - (1 - params.epsilon) * params.lambda * MB;
     
-    //activated microglia 
-    dxdt[1] = params.lambda * MB - params.ni * CA;
+    //activated microglia
+    dxdt[1] = (1 - params.epsilon) * params.lambda * MB - params.ni * CA;
     
     //oligodendrocyte
     dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * CP; 

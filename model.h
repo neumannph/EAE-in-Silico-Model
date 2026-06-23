@@ -9,7 +9,7 @@
 struct parameters {
     double microglia; // average microglia density               
     double oligod;    // average oligodendrocyte density              
-    double basal;     // production rate of basal microglia
+    double delta;     // production rate of basal microglia
     double lambda;    // production rate of microglia    
     double ni;        // microglia decay rate                 
     double p;         // production rate of oligodendrocyte
