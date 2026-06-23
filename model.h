@@ -1,6 +1,7 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
-#define NUM_VAR 5
+#define NUM_VAR_M1 4
+#define NUM_VAR_M2 5
 
 #include <iostream>
 #include <string>
@@ -25,18 +26,26 @@ struct parameters {
 
 extern parameters params;
 
-void euler(double *x, double dt);
+void eulerModel1(double *x, double dt);
+
+void eulerModel2(double *x, double dt);
 
 void rk4(double *x, double dt);
 
-void calculate_derivatives(double *current_x, double *dxdt);
+void calculateDerivativesModel1(double *current_x, double *dxdt);
 
-void run_simulation (double *x, double dt, double t_final, const std::string &file_name);
+void calculateDerivativesModel2(double *current_x, double *dxdt);
 
-void writeFile(double *x, double t, std::ofstream &file);
+void model1(double *x, double dt, double t_final, const std::string &file_name);
 
-void ParametersInitializer21DaysModel();
+void model2(double *x, double dt, double t_final, const std::string &file_name);
 
-void ParametersInitializer58DaysModel();
+void writeFileM1(double *x, double t, std::ofstream &file);
+
+void writeFileM2(double *x, double t, std::ofstream &file);
+
+void ParametersInitializer21DaysModel1();
+
+void ParametersInitializer21DaysModel2();
 
 #endif 

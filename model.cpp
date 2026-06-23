@@ -6,7 +6,28 @@ using namespace std;
 
 parameters params;
 
-void run_simulation (double *x, double dt, double t_final, const string &file_name) {
+void model1(double *x, double dt, double t_final, const string &file_name) {
+    ofstream file(file_name);
+
+    if (!file.is_open()) {
+        cerr << "ERRO AO ABRIR O ARQUIVO" << endl;
+        exit(1);
+    }
+
+    double t = 0.0;
+    file << "tempo,microglias,oligodendrocytes,citocinaPro,citocinaAnti\n"; // HEADER OF THE CSV FILE
+    writeFileM1(x, t, file); // PRINT THE INITIAL CONDITION IN file_name (.csv)
+    
+    //PRINT EACH DATA IN file_name (.csv)
+    while (t < t_final) {
+        eulerModel1(x, dt);
+        t += dt;
+        writeFileM1(x, t, file); 
+    }
+    file.close();
+}
+
+void model2(double *x, double dt, double t_final, const string &file_name) {
     ofstream file(file_name);
 
     if (!file.is_open()) {
@@ -16,61 +37,61 @@ void run_simulation (double *x, double dt, double t_final, const string &file_na
 
     double t = 0.0;
     file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti\n"; // HEADER OF THE CSV FILE
-    writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN dados.csv
+    writeFileM2(x, t, file); // PRINT THE INITIAL CONDITION IN file_name (.csv)
     
-    //PRINT EACH DATA IN dados.csv
+    //PRINT EACH DATA IN file_name (.csv)
     while (t < t_final) {
-        euler(x, dt);
-        //rk4(x, dt);
+        eulerModel2(x, dt);
         t += dt;
-        writeFile(x, t, file); 
+        writeFileM2(x, t, file); 
     }
     file.close();
 }
 
-void euler(double *x, double dt) {
-    double dxdt[NUM_VAR];
+void eulerModel1(double *x, double dt) {
+    double dxdt[NUM_VAR_M1];
 
-    calculate_derivatives(x, dxdt);
+    calculateDerivativesModel1(x, dxdt);
 
-    for(int i = 0; i < NUM_VAR; i++) {
+    for(int i = 0; i < NUM_VAR_M1; i++) {
         x[i] = x[i] + dt * dxdt[i];
         if(x[i] <= 0)
             x[i] = 0.0;
     }
 }
 
-void rk4(double *x, double dt) {
-    double k1[NUM_VAR], k2[NUM_VAR], k3[NUM_VAR], k4[NUM_VAR];
-    double temp[NUM_VAR];
-    
-    //k1
-    calculate_derivatives(x, k1);
-    for(int i = 0; i < NUM_VAR; i++)
-        temp[i] = x[i] + 0.5 * dt * k1[i];    
+void eulerModel2(double *x, double dt) {
+    double dxdt[NUM_VAR_M2];
 
-    //k2
-    calculate_derivatives(temp, k2);
-    for(int i = 0; i < NUM_VAR; i++)
-        temp[i] = x[i] + 0.5 * dt * k2[i];
-    
-    //k3    
-    calculate_derivatives(temp, k3);
-    for(int i = 0; i < NUM_VAR; i++) 
-        temp[i] = x[i] + dt * k3[i];
+    calculateDerivativesModel2(x, dxdt);
 
-    //k4
-    calculate_derivatives(temp, k4);
-
-    //atualiza as variaveis
-    for(int i = 0; i < NUM_VAR; i++) {
-        x[i] += (dt/6.0) * (k1[i] + 2*k2[i] + 2*k3[i] + k4[i]);
+    for(int i = 0; i < NUM_VAR_M2; i++) {
+        x[i] = x[i] + dt * dxdt[i];
         if(x[i] <= 0)
             x[i] = 0.0;
     }
 }
 
-void calculate_derivatives(double *current_x, double *dxdt) {
+void calculateDerivativesModel1(double *current_x, double *dxdt) {
+    double MA = current_x[0];  // MA = density of activated microglias (cells/mm²)
+    double O  = current_x[1];  // O  = density of oligodendrocytes (cells/mm²)
+    double CP = current_x[2];  // CP = concentration of pro-inflamatory cytokines (pg/ml)
+    double CA = current_x[3];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
+
+    //activated microglia
+    dxdt[0] = params.lambda * MA * (1 - MA/params.microglia) - params.ni * CA;
+    
+    //oligodendrocyte
+    dxdt[1] = params.p * O * (1 - O/params.oligod) - params.gamma * CP; 
+
+    //pro-inflamatory cytokines
+    dxdt[2] = params.beta * MA - params.alpha * CA;
+    
+    //anti-inflamatory cytokines
+    dxdt[3] = params.mi * CP - params.kappa * CA;
+}
+
+void calculateDerivativesModel2(double *current_x, double *dxdt) {
     double MB = current_x[0];  // MB = basal density of microglias (cells/mm²)
     double MA = current_x[1];  // MA = density of activated microglias (cells/mm²)
     double O  = current_x[2];  // O  = density of oligodendrocytes (cells/mm²)
@@ -93,7 +114,17 @@ void calculate_derivatives(double *current_x, double *dxdt) {
     dxdt[4] = params.mi * CP - params.kappa * CA;
 }
 
-void writeFile(double *x, double t, ofstream &file) {
+void writeFileM1(double *x, double t, ofstream &file) {
+    // PRINT MODEL: TIME   MICROGLIA   CELULAS IBA-1+   CYTOKINES   OLIGODENDROCITES
+    file << fixed << setprecision(3);
+    file << t << ",";       // Time
+    file << x[0] << ",";    // Microglia
+    file << x[1] << ",";    // Oligodendrocyte     
+    file << x[2] << ",";    // Pro-Inflamatory Cytokines
+    file << x[3] << "\n";     // Anti-Inflamatory Cytokines
+}
+
+void writeFileM2(double *x, double t, ofstream &file) {
     // PRINT MODEL: TIME   MICROGLIA   CELULAS IBA-1+   CYTOKINES   OLIGODENDROCITES
     file << fixed << setprecision(3);
     file << t << ",";       // Time
@@ -103,3 +134,36 @@ void writeFile(double *x, double t, ofstream &file) {
     file << x[3] << ",";    // Pro-Inflamatory Cytokines
     file << x[4] << "\n";     // Anti-Inflamatory Cytokines
 }
+
+
+/* 
+void rk4(double *x, double dt) {
+    double k1[NUM_VAR_M1], k2[NUM_VAR_M1], k3[NUM_VAR_M1], k4[NUM_VAR_M1];
+    double temp[NUM_VAR_M1];
+    
+    //k1
+    calculateDerivativesModel1(x, k1);
+    for(int i = 0; i < NUM_VAR_M1; i++)
+        temp[i] = x[i] + 0.5 * dt * k1[i];    
+
+    //k2
+    calculateDerivativesModel1(temp, k2);
+    for(int i = 0; i < NUM_VAR_M1; i++)
+        temp[i] = x[i] + 0.5 * dt * k2[i];
+    
+    //k3    
+    calculateDerivativesModel1(temp, k3);
+    for(int i = 0; i < NUM_VAR_M1; i++) 
+        temp[i] = x[i] + dt * k3[i];
+
+    //k4
+    calculateDerivativesModel1(temp, k4);
+
+    //atualiza as variaveis
+    for(int i = 0; i < NUM_VAR_M1; i++) {
+        x[i] += (dt/6.0) * (k1[i] + 2*k2[i] + 2*k3[i] + k4[i]);
+        if(x[i] <= 0)
+            x[i] = 0.0;
+    }
+}
+ */
