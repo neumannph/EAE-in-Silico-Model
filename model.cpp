@@ -6,7 +6,7 @@ using namespace std;
 
 parameters params;
 
-void model1(double *x, double dt, double t_final, const string &file_name) {
+void solveModel1(double *x, double dt, double t_final, const string &file_name) {
     ofstream file(file_name);
 
     if (!file.is_open()) {
@@ -27,7 +27,7 @@ void model1(double *x, double dt, double t_final, const string &file_name) {
     file.close();
 }
 
-void model2(double *x, double dt, double t_final, const string &file_name) {
+void solveModel2(double *x, double dt, double t_final, const string &file_name) {
     ofstream file(file_name);
 
     if (!file.is_open()) {
@@ -36,12 +36,13 @@ void model2(double *x, double dt, double t_final, const string &file_name) {
     }
 
     double t = 0.0;
-    file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti\n"; // HEADER OF THE CSV FILE
+    file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti,totalMicroglia\n"; // HEADER OF THE CSV FILE
     writeFileM2(x, t, file); // PRINT THE INITIAL CONDITION IN file_name (.csv)
     
     //PRINT EACH DATA IN file_name (.csv)
     while (t < t_final) {
         eulerModel2(x, dt);
+        x[5] = x[0] + x[1]; // Update total microglia
         t += dt;
         writeFileM2(x, t, file); 
     }
@@ -55,7 +56,7 @@ void eulerModel1(double *x, double dt) {
 
     for(int i = 0; i < NUM_VAR_M1; i++) {
         x[i] = x[i] + dt * dxdt[i];
-        if(x[i] <= 0)
+        if(x[i] < 0)
             x[i] = 0.0;
     }
 }
@@ -67,8 +68,8 @@ void eulerModel2(double *x, double dt) {
 
     for(int i = 0; i < NUM_VAR_M2; i++) {
         x[i] = x[i] + dt * dxdt[i];
-        if(x[i] <= 0)
-            x[i] = 0.0;
+        if(x[i] < 0)
+            x[i] = 0;
     }
 }
 
@@ -105,12 +106,14 @@ void calculateDerivativesModel2(double *current_x, double *dxdt) {
     dxdt[1] = (1 - params.epsilon) * params.lambda * MB - params.ni * CA;
     
     //oligodendrocyte
-    dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * CP; 
+    dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * MA; 
 
     //pro-inflamatory cytokines
+    // dxdt[3] = params.beta * MA + params.alpha * CP * (1 - CP/params.citoP) - params.alpha * CA;
     dxdt[3] = params.beta * MA - params.alpha * CA;
     
     //anti-inflamatory cytokines
+    // dxdt[4] = params.mi * CP + params.kappa * CA * (1 - CA/params.citoA) - params.kappa * CA; 
     dxdt[4] = params.mi * CP - params.kappa * CA;
 }
 
@@ -132,12 +135,12 @@ void writeFileM2(double *x, double t, ofstream &file) {
     file << x[1] << ",";    // Celulas Iba-1+
     file << x[2] << ",";    // Oligodendrocyte     
     file << x[3] << ",";    // Pro-Inflamatory Cytokines
-    file << x[4] << "\n";     // Anti-Inflamatory Cytokines
+    file << x[4] << ",";     // Anti-Inflamatory Cytokines
+    file << x[5] << "\n";     // Total Microglia
+    
 }
 
-
-/* 
-void rk4(double *x, double dt) {
+/* void rk4(double *x, double dt) {
     double k1[NUM_VAR_M1], k2[NUM_VAR_M1], k3[NUM_VAR_M1], k4[NUM_VAR_M1];
     double temp[NUM_VAR_M1];
     
@@ -167,3 +170,18 @@ void rk4(double *x, double dt) {
     }
 }
  */
+
+void runEpsilonSweep(double dt, double t_final) {
+    cout << "Running epsilon sweep..." << endl;
+    for(params.epsilon; params.epsilon < 1; params.epsilon+=0.1) {
+        cout << "Running simulation with epsilon = " << params.epsilon << endl;
+        double y[NUM_VAR_M2] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, params.microglia};
+        string epsilonStr = to_string(params.epsilon);
+        epsilonStr.erase(epsilonStr.find_last_not_of('0') + 1, std::string::npos); // Remove extra zeros
+        if (epsilonStr.back() == '.') {
+            epsilonStr += '0';
+        }
+        string fileNameModel2 = "dadosModelo2_epsilon_" + epsilonStr + ".csv";
+        solveModel2(y, dt, t_final, fileNameModel2);
+    }
+}

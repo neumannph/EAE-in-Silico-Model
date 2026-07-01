@@ -1,7 +1,7 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
 #define NUM_VAR_M1 4
-#define NUM_VAR_M2 5
+#define NUM_VAR_M2 6
 
 #include <iostream>
 #include <string>
@@ -19,6 +19,8 @@ struct parameters {
     double alpha;     // pro-inflamatory cytokine decay rate                       
     double mi;        // anti-inflamatory cytokine production rate
     double kappa;     // anti-inflamatory cytokine decay rate   
+    double citoP;
+    double citoA;
 
 
     double epsilon;     // treatment efficacy
@@ -36,9 +38,9 @@ void calculateDerivativesModel1(double *current_x, double *dxdt);
 
 void calculateDerivativesModel2(double *current_x, double *dxdt);
 
-void model1(double *x, double dt, double t_final, const std::string &file_name);
+void solveModel1(double *x, double dt, double t_final, const std::string &file_name);
 
-void model2(double *x, double dt, double t_final, const std::string &file_name);
+void solveModel2(double *x, double dt, double t_final, const std::string &file_name);
 
 void writeFileM1(double *x, double t, std::ofstream &file);
 
@@ -47,5 +49,7 @@ void writeFileM2(double *x, double t, std::ofstream &file);
 void ParametersInitializer21DaysModel1();
 
 void ParametersInitializer21DaysModel2();
+
+void runEpsilonSweep(double dt, double t_final);
 
 #endif 
