@@ -170,7 +170,6 @@ def singlePlotModel2(arquivo, numNome):
     ax[0].tick_params(labelsize = 12)
     ax[0].set_ylim(-20, 450)
 
-
     plotMarkers(ax)
 
     # Plota as Citocinas Pró-Inflamatórias
@@ -188,7 +187,7 @@ def singlePlotModel2(arquivo, numNome):
     ax[1].tick_params(labelsize = 12)
     ax[1].set_ylim(-100, 2000)
     plt.tight_layout() 
-    plt.savefig('modelo2_epsilon_'+ str(numNome) +'.jpg')
+    plt.savefig('modelo.jpg')
 
 # print("============= PICOS MODELO 1 =============")
 # printPicosModel1()
@@ -200,8 +199,7 @@ def singlePlotModel2(arquivo, numNome):
 #     arquivo = 'dadosModelo2_epsilon_' + str(i/10) + '.csv'
 #     plotModel2(arquivo, numNome)
 
-arquivo = 'dadosModelo2_epsilon_0.0.csv'
-printPicosModel2()
+arquivo = 'dadosModelo.csv'
 singlePlotModel2(arquivo, 0.0)
 
 plt.show()

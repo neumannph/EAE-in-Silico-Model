@@ -40,7 +40,6 @@ void eulerMethod(double *x, double dt) {
     for(int i = 0; i < NUM_VAR_M2; i++) {
         x[i] = x[i] + dt * dxdt[i];
     }
-
 }
 
 void calculateDerivatives(double *current_x, double *dxdt) {
@@ -50,23 +49,23 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     double CP = current_x[3];  // CP = concentration of pro-inflamatory cytokines (pg/ml)
     double CA = current_x[4];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
 
-    bool SIGNAL = signal(params.epsilon);
+    bool MOG = params.MOG; // MOG = microglia activation threshold (true or false)
 
     //basal microglia
-    dxdt[0] = params.delta * (params.microglia - MB) - SIGNAL * (1 - params.epsilon) * params.lambda * MB;
+    dxdt[0] = params.delta * (params.microglia - MB) - MOG * (1 - params.epsilon) * params.lambda * MB;
     
     //activated microglia
-    dxdt[1] = SIGNAL * ((1 - params.epsilon) * params.lambda * MB - (params.ni * CA));
+    dxdt[1] = MOG * ((1 - params.epsilon) * params.lambda * MB - (params.ni * CA));
     
     //oligodendrocyte
     dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * MA; 
 
     //pro-inflamatory cytokines
     // dxdt[3] = params.beta * MA - params.alpha * CA;
-    dxdt[3] = SIGNAL * (params.beta * MA - params.alpha * CA);
+    dxdt[3] = MOG * (params.beta * MA - params.alpha * CA);
     
     //anti-inflamatory cytokines
-    dxdt[4] = SIGNAL * (params.mi * CP - params.kappa * CA);
+    dxdt[4] = MOG * (params.mi * CP - params.kappa * CA);
     // dxdt[4] = params.mi * CP * (1 - CP/params.citoP) - params.kappa * CA;
 }
 

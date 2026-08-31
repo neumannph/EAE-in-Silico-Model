@@ -22,36 +22,26 @@ struct parameters {
     double kappa;     // anti-inflamatory cytokine decay rate   
     double citoP;
     double citoA;
-    double CPdecay;
 
-    double epsilon;     // treatment efficacy
+    double MOG;       // microglia activation threshold
+    double epsilon;   // treatment efficacy
 };
 
 extern parameters params;
 
 double signal(double epsilon);
 
-void eulerModel1(double *x, double dt);
-
 void eulerMethod(double *x, double dt);
 
 void rk4(double *x, double dt);
 
-void calculateDerivativesModel1(double *current_x, double *dxdt);
-
 void calculateDerivatives(double *current_x, double *dxdt);
-
-void solveModel1(double *x, double dt, double t_final, const std::string &file_name);
 
 void solveModel(double *x, double dt, double t_final, const std::string &file_name);
 
-void writeFileM1(double *x, double t, std::ofstream &file);
-
 void writeFile(double *x, double t, std::ofstream &file);
 
-void ParametersInitializer21DaysModel1();
-
-void ParametersInitializer21DaysModel2();
+void ParametersInitializer21DaysModel();
 
 void runEpsilonSweep(double dt, double t_final);
 
