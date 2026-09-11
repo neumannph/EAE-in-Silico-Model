@@ -1,7 +1,6 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
-#define NUM_VAR_M1 4
-#define NUM_VAR_M2 6
+#define NUM_VAR 8
 
 #include <iostream>
 #include <string>
@@ -23,13 +22,18 @@ struct parameters {
     double citoP;
     double citoA;
 
+    double tCD4;      // basal density of CD4+ T cells
+    double tCD8;      // basal density of CD8+ T cells
+    
+    double alphaTCD4; // CD4+ T cells homeostasis rate
+    double betaTCD8;  // CD8+ T cells homeostasis rate
+
+
     double MOG;       // microglia activation threshold
     double epsilon;   // treatment efficacy
 };
 
 extern parameters params;
-
-double signal(double epsilon);
 
 void eulerMethod(double *x, double dt);
 

@@ -15,7 +15,7 @@ void solveModel(double *x, double dt, double t_final, const string &file_name) {
     }
 
     double t = 0.0;
-    file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti,totalMicroglia\n"; // HEADER OF THE CSV FILE
+    file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti,totalMicroglia,tCD4,tCD8\n"; // HEADER OF THE CSV FILE
     writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN file_name (.csv)
 
     //PRINT EACH DATA IN file_name (.csv)
@@ -26,18 +26,18 @@ void solveModel(double *x, double dt, double t_final, const string &file_name) {
         writeFile(x, t, file); 
     }
 
-    cout << "SIGNAL: " << signal(params.epsilon) << endl;
+    cout << "SIGNAL: " << params.MOG << endl;
     cout << "epsilon: " << params.epsilon << endl;
 
     file.close();
 }
 
 void eulerMethod(double *x, double dt) {
-    double dxdt[NUM_VAR_M2];
+    double dxdt[NUM_VAR];
     
     calculateDerivatives(x, dxdt);
 
-    for(int i = 0; i < NUM_VAR_M2; i++) {
+    for(int i = 0; i < NUM_VAR; i++) {
         x[i] = x[i] + dt * dxdt[i];
     }
 }
@@ -48,6 +48,8 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     double O  = current_x[2];  // O  = density of oligodendrocytes (cells/mm²)
     double CP = current_x[3];  // CP = concentration of pro-inflamatory cytokines (pg/ml)
     double CA = current_x[4];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
+    double TH = current_x[6];  // TH = density of CD4+ T cells () 
+    double TC = current_x[7];  // TC = density of CD8+ T cells ()
 
     bool MOG = params.MOG; // MOG = microglia activation threshold (true or false)
 
@@ -61,20 +63,20 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * MA; 
 
     //pro-inflamatory cytokines
-    // dxdt[3] = params.beta * MA - params.alpha * CA;
     dxdt[3] = MOG * (params.beta * MA - params.alpha * CA);
     
     //anti-inflamatory cytokines
     dxdt[4] = MOG * (params.mi * CP - params.kappa * CA);
-    // dxdt[4] = params.mi * CP * (1 - CP/params.citoP) - params.kappa * CA;
-}
 
-double signal(double epsilon) {
-    return 1 - pow(0.0, 1.0 - epsilon);
+    //T CD4+ lymphocyte
+    dxdt[6] = params.alphaTCD4 * (params.tCD4 - TH);
+    
+    //T CD8+ lymphocyte
+    dxdt[7] = params.betaTCD8 * (params.tCD8 - TC);
 }
 
 void writeFile(double *x, double t, ofstream &file) {
-    // PRINT MODEL: TIME   MICROGLIA   CELULAS IBA-1+   CYTOKINES   OLIGODENDROCITES
+    // PRINT MODEL: time,microglia,celula-iba1+,oligodendrocytes,proInfCytokines,antiInfCytokine,totalMicroglia, tCD4+, tCD8+
     file << fixed << setprecision(3);
     file << t << ",";       // Time
     file << x[0] << ",";    // Microglia
@@ -82,8 +84,9 @@ void writeFile(double *x, double t, ofstream &file) {
     file << x[2] << ",";    // Oligodendrocyte     
     file << x[3] << ",";    // Pro-Inflamatory Cytokines
     file << x[4] << ",";    // Anti-Inflamatory Cytokines
-    file << x[5] << "\n";   // Total Microglia
-    
+    file << x[5] << ",";   // Total Microglia
+    file << x[6] << ",";   // T CD4+ lymphocyte
+    file << x[7] << "\n";   // T CD8+ lymphocyte    
 }
 
 /* void rk4(double *x, double dt) {
@@ -121,7 +124,7 @@ void runEpsilonSweep(double dt, double t_final) {
     cout << "Running epsilon sweep..." << endl;
     for(params.epsilon+0.1; params.epsilon < 1; params.epsilon+=0.1) {
         cout << "Running simulation with epsilon = " << params.epsilon << endl;
-        double y[NUM_VAR_M2] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, params.microglia};
+        double y[NUM_VAR] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, params.microglia};
         string epsilonStr = to_string(params.epsilon);
         epsilonStr.erase(epsilonStr.find_last_not_of('0') + 1, std::string::npos); // Remove extra zeros
         if (epsilonStr.back() == '.') {

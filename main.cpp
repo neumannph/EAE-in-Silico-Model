@@ -14,29 +14,33 @@ void ParametersInitializer21DaysModel() {
     params.beta = 3.9e-1;     // pg*mm²/ml*cells*dia  // pro-inflamatory cytokine production rate per microglia               
     params.alpha = 6.2e-2;    // dia^-1               // pro-inflamatory cytokine decay rate                                  
     params.mi = 7.9e-1;       // dia^-1               // anti-inflamatory cytokine production rate 
-    params.kappa = 4.6e-1;    // dia^-1               // anti-inflamatory cytokine decay rate 
-    params.citoP = 198.0;
-    params.citoA = 392.0;
+    params.kappa = 3.6e-1;    // dia^-1               // anti-inflamatory cytokine decay rate 
+    params.citoP = 198.0;     // pg/ml                // basal pro-inflamatory cytokine concentration
+    params.citoA = 392.0;     // pg/ml                // basal anti-inflamatory cytokine concentration
+    
+    params.tCD4 = 80.0;       // cells/mm²            // basal density of homeostasis CD4+ T cells
+    params.tCD8 = 40.0;       // cells/mm²            // basal density of homeostasis CD8+ T cells
+    
+    params.alphaTCD4 = 1.0e-1;
+    params.betaTCD8 = 1.0e-2;
     
     params.MOG = true;        // microglia activation threshold
-    params.epsilon = 1.0;     // treatment efficacy
+    params.epsilon = 0.0;     // treatment efficacy
 }
 
 int main() { 
     // RUN SIMULATION FOR MODEL 2 (WITH MICROGLIA BASAL DENSITY)
     ParametersInitializer21DaysModel();
 
-    double dt = 0.01;      // TIME STEP (DAYS)
+    double dt = 0.01;       // TIME STEP (DAYS)
     double t_final = 21.0;  // FINAL TIME (DAYS)
 
     // INITIAL CONDITIONS
-    //    y[6]            = {MB[0], MA[0], O[0], CP[0], CA[0], T[0]}
-    double y[NUM_VAR_M2] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, params.microglia};
+    //     x[6]       = {MB[0], MA[0], O[0], CP[0], CA[0], MT[0], TH[0], TC[0]}
+    double x[NUM_VAR] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, params.microglia, 0.0, 0.0};
 
-    // double y[NUM_VAR_M2] = {params.microglia, 0.0, 400.0, 0.0, 0.0, params.microglia};
-
-    string fileNameModel2 = "dadosModelo.csv"; // OUTPUT FILE NAME
-    solveModel(y, dt, t_final, fileNameModel2);
+    string fileName = "dadosModelo.csv"; // OUTPUT FILE NAME
+    solveModel(x, dt, t_final, fileName);
 
     //runEpsilonSweep(dt, t_final);
 
