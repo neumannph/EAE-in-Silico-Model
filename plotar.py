@@ -11,7 +11,7 @@ plt.rcParams.update({
 })
 
 # Função para plotar os picos de cada função
-def printPicos(arquivo):
+def printPicos():
     colunas = ['Tempo', 'Micróglia Basal', 'Células Iba-1+', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'Micróglias Totais', 'T CD4+', 'T CD8+']
     
     try:
@@ -120,10 +120,10 @@ def plotModel(arquivo):
     ax[0].plot(df_local['Tempo'], df_local['Oligodendrócitos'], label='Oligodendrocyte', linewidth=3, color = 'tab:green')
 
     # Plota os linfócitos T CD4+
-    ax[0].plot(df_local['Tempo'], df_local['T CD4+'], label='T CD4+', linewidth=3, color = 'tab:cyan')
+    ax[0].plot(df_local['Tempo'], df_local['T CD4+'], label='T CD4+', linewidth=3, color = 'tab:gray')
 
     # Plota os linfócitos T CD8+
-    ax[0].plot(df_local['Tempo'], df_local['T CD8+'], label='T CD8+', linewidth=3, color = 'tab:olive')
+    ax[0].plot(df_local['Tempo'], df_local['T CD8+'], label='T CD8+', linewidth=3, color = 'tab:brown')
 
     # Configurações Visuais
     ax[0].set_title('Density of basal microglia, activated microglia,\nand oligodendrocytes', fontsize = 13, fontweight='bold')

@@ -9,7 +9,7 @@ void ParametersInitializer21DaysModel() {
     params.delta = 1.0e-1;    // dia^-1               // production rate of microglia
     params.lambda = 2.3e-1;   // cells/mm²*dia        // activation rate of microglia by basal microglia
     params.ni = 2.0e-2;       // cells/mm²*dia        // microglia decay rate 
-    params.p = 6.5e-1;        // dia^-1               // production rate of oligodendrocyte
+    params.rho = 6.5e-1;        // dia^-1               // production rate of oligodendrocyte
     params.gamma = 2.0e-1;    // cells*ml/mm²*pg*dia  // pro-inflamatory cytokine-induced oligodendrocyte damage 
     params.beta = 3.9e-1;     // pg*mm²/ml*cells*dia  // pro-inflamatory cytokine production rate per microglia               
     params.alpha = 6.2e-2;    // dia^-1               // pro-inflamatory cytokine decay rate                                  

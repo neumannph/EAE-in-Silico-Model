@@ -60,7 +60,7 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     dxdt[1] = MOG * ((1 - params.epsilon) * params.lambda * MB - (params.ni * CA));
     
     //oligodendrocyte
-    dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * MA; 
+    dxdt[2] = params.rho * O * (1 - O/params.oligod) - params.gamma * MA; 
 
     //pro-inflamatory cytokines
     dxdt[3] = MOG * (params.beta * MA - params.alpha * CA);

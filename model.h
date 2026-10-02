@@ -13,7 +13,7 @@ struct parameters {
     double delta;     // production rate of basal microglia
     double lambda;    // production rate of microglia    
     double ni;        // microglia decay rate                 
-    double p;         // production rate of oligodendrocyte
+    double rho;         // production rate of oligodendrocyte
     double gamma;     // pro-inflamatory cytokine-induced oligodendrocyte damage
     double beta;      // cytokine production rate per microglia       
     double alpha;     // pro-inflamatory cytokine decay rate                       
