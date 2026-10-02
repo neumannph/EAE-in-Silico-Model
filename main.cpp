@@ -21,9 +21,20 @@ void ParametersInitializer21DaysModel() {
     params.tCD4 = 80.0;       // cells/mm²            // basal density of homeostasis CD4+ T cells
     params.tCD8 = 40.0;       // cells/mm²            // basal density of homeostasis CD8+ T cells
     
-    params.alphaTCD4 = 1.0e-1;
-    params.betaTCD8 = 1.0e-2;
-    
+    params.alphaTCD4 = 1.0e-1; // CD4+ T cells homeostasis rate
+    params.alphaTCD8 = 1.0e-2; // CD8+ T cells homeostasis rate
+
+    params.betaTCD4 = 1.0e-1; // CD4+ T cells proliferation rate
+    params.betaTCD8 = 1.0e-1; // CD8+ T cells proliferation rate
+
+    params.kappaTCD4 = 1.0e-3; // CD4+ T cells decay rate
+    params.kappaTCD8 = 5.0e-4; // CD8+ T cells decay rate
+
+    params.rhoTCD4 = 1.0e-1; // CD4+ T cells anti-inflamatory cytokine production rate
+    params.rhoTCD8 = 1.0e-1; // CD8+ T cells pró-inflamatory cytokine production rate
+
+    params.gammaTCD8 = 1.0e-1; // CD8+ T cells oligodendrocyte damage rate
+
     params.MOG = true;        // microglia activation threshold
     params.epsilon = 0.0;     // treatment efficacy
 }
@@ -36,8 +47,8 @@ int main() {
     double t_final = 21.0;  // FINAL TIME (DAYS)
 
     // INITIAL CONDITIONS
-    //     x[6]       = {MB[0], MA[0], O[0], CP[0], CA[0], MT[0], TH[0], TC[0]}
-    double x[NUM_VAR] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, params.microglia, 0.0, 0.0};
+    //     x[6]       = {MB[0], MA[0], O[0], CP[0], CA[0], TH[0], TC[0], MT[0]}
+    double x[NUM_VAR] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, 0.0, 0.0, params.microglia};
 
     string fileName = "dadosModelo.csv"; // OUTPUT FILE NAME
     solveModel(x, dt, t_final, fileName);

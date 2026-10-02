@@ -92,7 +92,7 @@ def plotMarkers(ax):
 
 # Função para plotar os gráficos
 def plotModel(arquivo):
-    colunas = ['Tempo', 'Micróglia Basal', 'Microglia Ativada', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'Microglia Total', 'T CD4+', 'T CD8+']
+    colunas = ['Tempo', 'Micróglia Basal', 'Microglia Ativada', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'T CD4+', 'T CD8+', 'Microglia Total']
     
     try:
         df_local = pd.read_csv(arquivo, sep=r',', header=0, names=colunas)
@@ -113,9 +113,6 @@ def plotModel(arquivo):
     # Plota a Micróglia Ativada
     ax[0].plot(df_local['Tempo'], df_local['Microglia Ativada'], label='Activated Microglia', linewidth=3, color = 'tab:red')
 
-    # Plota o total de Micróglia
-    # ax[0].plot(df_local['Tempo'], df_local['Microglia Total'], label ='Total Microglia', linewidth=3, color = 'tab:brown')
-
     # Plota os Oligodendrócitos
     ax[0].plot(df_local['Tempo'], df_local['Oligodendrócitos'], label='Oligodendrocyte', linewidth=3, color = 'tab:green')
 
@@ -125,6 +122,9 @@ def plotModel(arquivo):
     # Plota os linfócitos T CD8+
     ax[0].plot(df_local['Tempo'], df_local['T CD8+'], label='T CD8+', linewidth=3, color = 'tab:brown')
 
+    # Plota o total de Micróglia
+    ax[0].plot(df_local['Tempo'], df_local['Microglia Total'], label ='Total Microglia', linewidth=3, color = 'tab:brown')
+
     # Configurações Visuais
     ax[0].set_title('Density of basal microglia, activated microglia,\nand oligodendrocytes', fontsize = 13, fontweight='bold')
     ax[0].set_xlabel('Time (days)', fontsize = 13, fontweight='bold')
@@ -132,7 +132,7 @@ def plotModel(arquivo):
     ax[0].grid(True) 
     ax[0].legend(fontsize = 13) 
     ax[0].tick_params(labelsize = 12)
-    ax[0].set_ylim(-20, 450)
+    # ax[0].set_ylim(-20, 450)
 
     plotMarkers(ax)
 
@@ -149,7 +149,7 @@ def plotModel(arquivo):
     ax[1].grid(True) 
     ax[1].legend(fontsize = 13) 
     ax[1].tick_params(labelsize = 12)
-    ax[1].set_ylim(-100, 2000)
+    # ax[1].set_ylim(-100, 2000)
     plt.tight_layout()
     plt.savefig('modelo.jpg')
 

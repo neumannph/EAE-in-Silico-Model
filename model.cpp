@@ -21,7 +21,7 @@ void solveModel(double *x, double dt, double t_final, const string &file_name) {
     //PRINT EACH DATA IN file_name (.csv)
     while (t < t_final) {
         eulerMethod(x, dt);
-        x[5] = x[0] + x[1]; // Update total microglia
+        x[7] = x[0] + x[1]; // Update total microglia
         t += dt;
         writeFile(x, t, file); 
     }
@@ -48,8 +48,8 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     double O  = current_x[2];  // O  = density of oligodendrocytes (cells/mm²)
     double CP = current_x[3];  // CP = concentration of pro-inflamatory cytokines (pg/ml)
     double CA = current_x[4];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
-    double TH = current_x[6];  // TH = density of CD4+ T cells () 
-    double TC = current_x[7];  // TC = density of CD8+ T cells ()
+    double TH = current_x[5];  // TH = density of CD4+ T cells () 
+    double TC = current_x[6];  // TC = density of CD8+ T cells ()
 
     bool MOG = params.MOG; // MOG = microglia activation threshold (true or false)
 
@@ -60,19 +60,19 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     dxdt[1] = MOG * ((1 - params.epsilon) * params.lambda * MB - (params.ni * CA));
     
     //oligodendrocyte
-    dxdt[2] = params.rho * O * (1 - O/params.oligod) - params.gamma * MA; 
+    dxdt[2] = params.rho * O * (1 - O/params.oligod) - params.gamma * MA - params.gammaTCD8 * TC; 
 
     //pro-inflamatory cytokines
-    dxdt[3] = MOG * (params.beta * MA - params.alpha * CA);
+    dxdt[3] = MOG * (params.beta * MA + params.rhoTCD8 * TC - params.alpha * CA);
     
     //anti-inflamatory cytokines
-    dxdt[4] = MOG * (params.mi * CP - params.kappa * CA);
+    dxdt[4] = MOG * (params.mi * CP + params.rhoTCD4 * TH - params.kappa * CA);
 
     //T CD4+ lymphocyte
-    dxdt[6] = params.alphaTCD4 * (params.tCD4 - TH);
+    dxdt[5] = params.alphaTCD4 * (params.tCD4 - TH) + params.betaTCD4 * TH - params.kappaTCD4 * CA;
     
     //T CD8+ lymphocyte
-    dxdt[7] = params.betaTCD8 * (params.tCD8 - TC);
+    dxdt[6] = params.alphaTCD8 * (params.tCD8 - TC) + params.betaTCD8 * TC - params.kappaTCD8 * CA;
 }
 
 void writeFile(double *x, double t, ofstream &file) {
@@ -84,9 +84,9 @@ void writeFile(double *x, double t, ofstream &file) {
     file << x[2] << ",";    // Oligodendrocyte     
     file << x[3] << ",";    // Pro-Inflamatory Cytokines
     file << x[4] << ",";    // Anti-Inflamatory Cytokines
-    file << x[5] << ",";   // Total Microglia
-    file << x[6] << ",";   // T CD4+ lymphocyte
-    file << x[7] << "\n";   // T CD8+ lymphocyte    
+    file << x[5] << ",";   // T CD4+ lymphocyte
+    file << x[6] << ",";   // T CD8+ lymphocyte    
+    file << x[7] << "\n";   // Total Microglia
 }
 
 /* void rk4(double *x, double dt) {
