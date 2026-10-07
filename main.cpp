@@ -8,7 +8,7 @@ void ParametersInitializer21DaysModel() {
     params.oligod = 400.0;     // cells/mm²            // average oligodendrocyte density                             
     params.delta = 1.0e-1;     // dia^-1               // production rate of microglia
     params.lambda = 2.3e-1;    // cells/mm²*dia        // activation rate of microglia by basal microglia
-    params.ni = 2.0e-2;        // cells/mm²*dia        // microglia decay rate 
+    params.ni = 1.5e-2;        // cells/mm²*dia        // microglia decay rate 
     params.rho = 6.5e-1;       // dia^-1               // production rate of oligodendrocyte
     params.gamma = 2.0e-1;     // cells*ml/mm²*pg*dia  // pro-inflamatory cytokine-induced oligodendrocyte damage 
     params.beta = 3.9e-1;      // pg*mm²/ml*cells*dia  // pro-inflamatory cytokine production rate per microglia               
@@ -22,16 +22,16 @@ void ParametersInitializer21DaysModel() {
     params.tCD8 = 40.0;        // cells/mm²            // basal density of homeostasis CD8+ T cells
     
     params.alphaTCD4 = 4.5e-1; // CD4+ T cells homeostasis rate
-    params.alphaTCD8 = 2.0e-1; // CD8+ T cells homeostasis rate
+    params.alphaTCD8 = 2.8e-1; // CD8+ T cells homeostasis rate
 
     params.betaTCD4 = 2.5e-1;  // CD4+ T cells proliferation rate
-    params.betaTCD8 = 2.7e-1;  // CD8+ T cells proliferation rate
+    params.betaTCD8 = 1.7e-1;  // CD8+ T cells proliferation rate
 
     params.kappaTCD4 = 1.6e-2; // CD4+ T cells decay rate
-    params.kappaTCD8 = 0.5e-1; // CD8+ T cells decay rate
+    params.kappaTCD8 = 6.5e-3; // CD8+ T cells decay rate
 
     params.rhoTCD4 = 1.6;   // CD4+ T cells anti-inflamatory cytokine production rate
-    params.rhoTCD8 = 1.3e0;    // CD8+ T cells pró-inflamatory cytokine production rate
+    params.rhoTCD8 = 2.0;    // CD8+ T cells pró-inflamatory cytokine production rate
 
     params.gammaTCD8 = 1.0e-1; // CD8+ T cells oligodendrocyte damage rate
 
