@@ -63,10 +63,10 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     dxdt[2] = params.rho * O * (1 - O/params.oligod) - params.gamma * MA - params.gammaTCD8 * TC; 
 
     //pro-inflamatory cytokines
-    dxdt[3] = MOG * (params.beta * MA + params.rhoTCD8 * TC - params.alpha * CA);
+    dxdt[3] = MOG * (params.rhoTCD8 * TC - params.alpha * CP);
     
     //anti-inflamatory cytokines
-    dxdt[4] = MOG * (params.mi * CP + params.rhoTCD4 * TH - params.kappa * CA);
+    dxdt[4] = MOG * (params.rhoTCD4 * TH - params.kappa * CA);
 
     //T CD4+ lymphocyte
     dxdt[5] = params.alphaTCD4 * (params.tCD4 - TH) + params.betaTCD4 * TH - params.kappaTCD4 * CA;
