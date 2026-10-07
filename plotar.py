@@ -123,16 +123,16 @@ def plotModel(arquivo):
     ax[0].plot(df_local['Tempo'], df_local['T CD8+'], label='T CD8+', linewidth=3, color = 'tab:brown')
 
     # Plota o total de Micróglia
-    ax[0].plot(df_local['Tempo'], df_local['Microglia Total'], label ='Total Microglia', linewidth=3, color = 'tab:brown')
+    # ax[0].plot(df_local['Tempo'], df_local['Microglia Total'], label ='Total Microglia', linewidth=3, color = 'tab:brown')
 
     # Configurações Visuais
     ax[0].set_title('Density of basal microglia, activated microglia,\nand oligodendrocytes', fontsize = 13, fontweight='bold')
     ax[0].set_xlabel('Time (days)', fontsize = 13, fontweight='bold')
     ax[0].set_ylabel('Density (cells/mm²)', fontsize = 13, fontweight='bold')
     ax[0].grid(True) 
-    ax[0].legend(fontsize = 13) 
+    ax[0].legend(fontsize = 10, loc = 'upper right') 
     ax[0].tick_params(labelsize = 12)
-    # ax[0].set_ylim(-20, 450)
+    ax[0].set_ylim(-20, 450)
 
     plotMarkers(ax)
 
@@ -147,9 +147,9 @@ def plotModel(arquivo):
     ax[1].set_xlabel('Time (days)', fontsize = 13, fontweight='bold')
     ax[1].set_ylabel('Concentration (pg/ml)', fontsize = 13, fontweight='bold')
     ax[1].grid(True) 
-    ax[1].legend(fontsize = 13) 
+    ax[1].legend(fontsize = 10, loc = 'upper left') 
     ax[1].tick_params(labelsize = 12)
-    # ax[1].set_ylim(-100, 2000)
+    ax[1].set_ylim(-100, 2000)
     plt.tight_layout()
     plt.savefig('modelo.jpg')
 

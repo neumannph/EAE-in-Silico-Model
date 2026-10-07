@@ -21,14 +21,14 @@ void ParametersInitializer21DaysModel() {
     params.tCD4 = 80.0;       // cells/mm²            // basal density of homeostasis CD4+ T cells
     params.tCD8 = 40.0;       // cells/mm²            // basal density of homeostasis CD8+ T cells
     
-    params.alphaTCD4 = 1.0e-1; // CD4+ T cells homeostasis rate
-    params.alphaTCD8 = 1.0e-2; // CD8+ T cells homeostasis rate
+    params.alphaTCD4 = 2.0e-1; // CD4+ T cells homeostasis rate
+    params.alphaTCD8 = 2.0e-1; // CD8+ T cells homeostasis rate
 
-    params.betaTCD4 = 1.0e-1; // CD4+ T cells proliferation rate
-    params.betaTCD8 = 1.0e-1; // CD8+ T cells proliferation rate
+    params.betaTCD4 = 3.0e-1; // CD4+ T cells proliferation rate
+    params.betaTCD8 = 2.7e-1; // CD8+ T cells proliferation rate
 
-    params.kappaTCD4 = 1.0e-3; // CD4+ T cells decay rate
-    params.kappaTCD8 = 5.0e-4; // CD8+ T cells decay rate
+    params.kappaTCD4 = 2.0e-2; // CD4+ T cells decay rate
+    params.kappaTCD8 = 0.9e-2; // CD8+ T cells decay rate
 
     params.rhoTCD4 = 1.0e-1; // CD4+ T cells anti-inflamatory cytokine production rate
     params.rhoTCD8 = 1.0e-1; // CD8+ T cells pró-inflamatory cytokine production rate
