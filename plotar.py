@@ -6,7 +6,6 @@ arquivo = 'dadosModelo.csv'
 
 # Configurações de fonte
 plt.rcParams.update({
-    'font.family': 'serif', 
     'font.serif': ['Times New Roman'],
 })
 
@@ -147,7 +146,7 @@ def plotModel(arquivo):
     ax[1].set_xlabel('Time (days)', fontsize = 13, fontweight='bold')
     ax[1].set_ylabel('Concentration (pg/ml)', fontsize = 13, fontweight='bold')
     ax[1].grid(True) 
-    ax[1].legend(fontsize = 10, loc = 'upper left') 
+    ax[1].legend(fontsize = 10, loc = 'upper right') 
     ax[1].tick_params(labelsize = 12)
     ax[1].set_ylim(-100, 2000)
     plt.tight_layout()
