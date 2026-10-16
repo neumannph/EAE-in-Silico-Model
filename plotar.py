@@ -86,8 +86,8 @@ def printPicos():
 
 # Função para plotar os marcadores de 21 dias
 def plotMarkers(ax):
-    ax[1].plot(21, 790, marker = '*', color = 'orange', markersize = 16, label = 'Experimental Data')
-    ax[1].plot(21, 1730, marker = '*', color = 'blue', markersize = 16, label = 'Experimental Data')
+    ax[2].plot(21, 790, marker = '*', color = 'orange', markersize = 16, label = 'Experimental Data')
+    ax[2].plot(21, 1730, marker = '*', color = 'blue', markersize = 16, label = 'Experimental Data')
 
 # Função para plotar os gráficos
 def plotModel(arquivo):
@@ -104,7 +104,7 @@ def plotModel(arquivo):
         print(f"Erro ao ler o arquivo2: {e}")
         exit()
 
-    fig, ax = plt.subplots(1,2, figsize = (12, 5))
+    fig, ax = plt.subplots(1,3, figsize = (12, 5))
 
     # Plota a Microglia basal
     ax[0].plot(df_local['Tempo'], df_local['Micróglia Basal'], label='Basal Microglia', linewidth=3, color = 'tab:purple')
@@ -115,40 +115,55 @@ def plotModel(arquivo):
     # Plota os Oligodendrócitos
     ax[0].plot(df_local['Tempo'], df_local['Oligodendrócitos'], label='Oligodendrocyte', linewidth=3, color = 'tab:green')
 
-    # Plota os linfócitos T CD4+
-    ax[0].plot(df_local['Tempo'], df_local['T CD4+'], label='T CD4+', linewidth=3, color = 'tab:gray')
-
-    # Plota os linfócitos T CD8+
-    ax[0].plot(df_local['Tempo'], df_local['T CD8+'], label='T CD8+', linewidth=3, color = 'tab:brown')
-
     # Plota o total de Micróglia
     # ax[0].plot(df_local['Tempo'], df_local['Microglia Total'], label ='Total Microglia', linewidth=3, color = 'tab:brown')
 
     # Configurações Visuais
-    ax[0].set_title('Density of basal microglia, activated microglia,\nand oligodendrocytes', fontsize = 13, fontweight='bold')
-    ax[0].set_xlabel('Time (days)', fontsize = 13, fontweight='bold')
-    ax[0].set_ylabel('Density (cells/mm²)', fontsize = 13, fontweight='bold')
+    ax[0].set_title('Density of basal microglia, activated microglia,\nand oligodendrocytes', fontsize = 13)
+    ax[0].set_xlabel('Time (days)', fontsize = 13)
+    ax[0].set_ylabel('Density (cells/mm²)', fontsize = 13)
     ax[0].grid(True) 
     ax[0].legend(fontsize = 10, loc = 'upper right') 
     ax[0].tick_params(labelsize = 12)
     ax[0].set_ylim(-20, 450)
 
-    plotMarkers(ax)
 
-    # Plota as Citocinas Pró-Inflamatórias
-    ax[1].plot(df_local['Tempo'], df_local['Citocinas Pró-Inflamatórias'], label='Pro-inflammatory Cytokine', linewidth=3, color = 'tab:orange')
 
-    # Plota as Citocinas Anti-Inflamatórias
-    ax[1].plot(df_local['Tempo'], df_local['Citocinas Anti-Inflamatórias'], label='Anti-inflammatory Cytokine', linewidth=3, color = 'tab:blue')
+    # Plota os linfócitos T CD4+
+    ax[1].plot(df_local['Tempo'], df_local['T CD4+'], label='T CD4+', linewidth=3, color = 'darkcyan')
+
+    # Plota os linfócitos T CD8+
+    ax[1].plot(df_local['Tempo'], df_local['T CD8+'], label='T CD8+', linewidth=3, color = 'crimson')
 
     # Configurações Visuais
-    ax[1].set_title('Concentration of Pro and Anti-inflammatory Cytokines', fontsize = 13, fontweight='bold')
-    ax[1].set_xlabel('Time (days)', fontsize = 13, fontweight='bold')
-    ax[1].set_ylabel('Concentration (pg/ml)', fontsize = 13, fontweight='bold')
+    ax[1].set_title('Density of T lymphocytes', fontsize = 13)
+    ax[1].set_xlabel('Time (days)', fontsize = 13)
+    ax[1].set_ylabel('Density (cells/mm²)', fontsize = 13)
     ax[1].grid(True) 
     ax[1].legend(fontsize = 10, loc = 'upper right') 
     ax[1].tick_params(labelsize = 12)
     ax[1].set_ylim(-100, 2000)
+    plt.tight_layout()
+    plt.savefig('modelo.jpg')
+
+
+
+    # Plota as Citocinas Pró-Inflamatórias
+    ax[2].plot(df_local['Tempo'], df_local['Citocinas Pró-Inflamatórias'], label='Pro-inflammatory Cytokine', linewidth=3, color = 'tab:orange')
+
+    # Plota as Citocinas Anti-Inflamatórias
+    ax[2].plot(df_local['Tempo'], df_local['Citocinas Anti-Inflamatórias'], label='Anti-inflammatory Cytokine', linewidth=3, color = 'tab:blue')
+
+    plotMarkers(ax)
+
+    # Configurações Visuais
+    ax[2].set_title('Concentration of Pro and Anti-inflammatory Cytokines', fontsize = 13)
+    ax[2].set_xlabel('Time (days)', fontsize = 13)
+    ax[2].set_ylabel('Concentration (pg/ml)', fontsize = 13)
+    ax[2].grid(True) 
+    ax[2].legend(fontsize = 10, loc = 'upper right') 
+    ax[2].tick_params(labelsize = 12)
+    ax[2].set_ylim(-100, 2000)
     plt.tight_layout()
     plt.savefig('modelo.jpg')
 

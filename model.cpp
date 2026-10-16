@@ -16,9 +16,9 @@ void solveModel(double *x, double dt, double t_final, const string &file_name) {
 
     double t = 0.0;
     file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti,totalMicroglia,tCD4,tCD8\n"; // HEADER OF THE CSV FILE
-    writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN file_name (.csv)
+    writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN file.csv
 
-    //PRINT EACH DATA IN file_name (.csv)
+    //PRINT EACH DATA IN file.csv
     while (t < t_final) {
         eulerMethod(x, dt);
         x[7] = x[0] + x[1]; // Update total microglia
@@ -76,7 +76,7 @@ void calculateDerivatives(double *current_x, double *dxdt) {
 }
 
 void writeFile(double *x, double t, ofstream &file) {
-    // PRINT MODEL: time,microglia,celula-iba1+,oligodendrocytes,proInfCytokines,antiInfCytokine,totalMicroglia, tCD4+, tCD8+
+    // PRINT MODEL: time,microglia,celula-iba1+,oligodendrocytes,proInfCytokines,antiInfCytokine,totalMicroglia,tCD4+,tCD8+
     file << fixed << setprecision(3);
     file << t << ",";       // Time
     file << x[0] << ",";    // Microglia
