@@ -1,0 +1,31 @@
+Micróglia Ativa
+
+--- Sensibilidade de Primeira Ordem (S1) [Efeito isolado] ---
+microglia : 14.328422605024901
+oligod    : 0.0%
+delta     : 6.310676232927313%
+lambda    : 2.542564395986725%
+ni        : 23.26585110738259%
+p         : 0.0%
+gamma     : 0.0%
+beta      : 23.208403843649944%
+alpha     : 7.484181110782592%
+mi        : 5.336066957860916%
+kappa     : 3.114293287081251%
+citoP     : -4.702613854806578e-03%
+citoA     : 0.03569096409152204%
+
+--- Sensibilidade Total (ST) [Efeito com interações] ---
+microglia : 22.62194790972806%
+oligod    : 0.0%
+delta     : 8.55977141362448%
+lambda    : 5.625059824994738%
+ni        : 28.287275893315594%
+p         : 0.0%
+gamma     : 0.0%
+beta      : 28.08814838774898%
+alpha     : 9.50787960795779%
+mi        : 8.205194420551973%
+kappa     : 5.329880746385229%
+citoP     : 0.22190856740935726%
+citoA     : 0.07440077481767874%

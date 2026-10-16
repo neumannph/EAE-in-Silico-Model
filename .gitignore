@@ -3,4 +3,4 @@
 *.jpg
 *.csv
 *.bat
-simulation
+simulation*.npy

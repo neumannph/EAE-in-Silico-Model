@@ -1,0 +1,31 @@
+Citocina Anti-Inflamatórias
+
+--- Sensibilidade de Primeira Ordem (S1) [Efeito isolado] ---
+microglia : 36.26021427604133%
+oligod    : 0.0%
+delta     : 6.558136786968367%
+lambda    : 8.642707159169555%
+ni        : 20.254756385469547%
+p         : 0.0%
+gamma     : 0.0%
+beta      : 5.253214948635923%
+alpha     : 4.519636304714269%
+mi        : 0.9323784689388558%
+kappa     : 0.1774675842640952%
+citoP     : 0.5052081693635674%
+citoA     : -3.788625942489001e-03%
+
+--- Sensibilidade Total (ST) [Efeito com interações] ---
+microglia : 42.25375761703347%
+oligod    : 0.0%
+delta     : 8.571224425735176%
+lambda    : 11.710737554288256%
+ni        : 29.%
+p         : 0.0%
+gamma     : 0.0%
+beta      : 11.267627239071111%
+alpha     : 7.517803166668369%
+mi        : 5.7423087023428084%
+kappa     : 2.9602472362113403%
+citoP     : 0.7309777773330819%
+citoA     : 0.0886254172638977%
