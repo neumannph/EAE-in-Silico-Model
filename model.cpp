@@ -15,13 +15,13 @@ void solveModel(double *x, double dt, double t_final, const string &file_name) {
     }
 
     double t = 0.0;
-    file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti,totalMicroglia,tCD4,tCD8\n"; // HEADER OF THE CSV FILE
+    file << "tempo,microglia,celula-iba1+,oligodendrocytes,citocinaPro,citocinaAnti,tHelp,tC,tReg,totalMicroglia\n"; // HEADER OF THE CSV FILE
     writeFile(x, t, file); // PRINT THE INITIAL CONDITION IN file.csv
 
     //PRINT EACH DATA IN file.csv
     while (t < t_final) {
         eulerMethod(x, dt);
-        x[7] = x[0] + x[1]; // Update total microglia
+        x[8] = x[0] + x[1]; // Update total microglia
         t += dt;
         writeFile(x, t, file); 
     }
@@ -60,19 +60,22 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     dxdt[1] = MOG * ((1 - params.epsilon) * params.lambda * MB - (params.ni * CA));
     
     //oligodendrocyte
-    dxdt[2] = params.rho * O * (1 - O/params.oligod) - params.gamma * MA - params.gammaTCD8 * TC; 
+    dxdt[2] = params.rho * O * (1 - O/params.oligod) - params.gamma * MA - params.gammaTC * TC; 
 
     //pro-inflamatory cytokines
-    dxdt[3] = MOG * (params.rhoTCD8 * TC - params.alpha * CP);
+    dxdt[3] = MOG * (params.rhoTC * TH - params.alpha * CP);
     
     //anti-inflamatory cytokines
-    dxdt[4] = MOG * (params.rhoTCD4 * TH - params.kappa * CA);
+    dxdt[4] = MOG * (params.rhoTH * TH - params.kappa * CA);
 
-    //T CD4+ lymphocyte
-    dxdt[5] = params.alphaTCD4 * (params.tCD4 - TH) + params.betaTCD4 * TH - params.kappaTCD4 * CA;
+    //T helper lymphocyte
+    dxdt[5] = params.alphaTH * (params.tHelper - TH) + params.betaTH * TH - params.kappaTH * CA;
     
-    //T CD8+ lymphocyte
-    dxdt[6] = params.alphaTCD8 * (params.tCD8 - TC) + params.betaTCD8 * TC - params.kappaTCD8 * CA;
+    //T cytotoxic lymphocyte
+    dxdt[6] = params.alphaTC * (params.tEff - TC) + params.betaTC * TC - params.kappaTC * CA;
+
+    //T regulatory lymphocyte
+    dxdt[7] = 0;
 }
 
 void writeFile(double *x, double t, ofstream &file) {
@@ -84,9 +87,10 @@ void writeFile(double *x, double t, ofstream &file) {
     file << x[2] << ",";    // Oligodendrocyte     
     file << x[3] << ",";    // Pro-Inflamatory Cytokines
     file << x[4] << ",";    // Anti-Inflamatory Cytokines
-    file << x[5] << ",";   // T CD4+ lymphocyte
-    file << x[6] << ",";   // T CD8+ lymphocyte    
-    file << x[7] << "\n";   // Total Microglia
+    file << x[5] << ",";    // T CD4+ lymphocyte
+    file << x[6] << ",";    // T CD8+ lymphocyte   
+    file << x[7] << ",";    // T regulatory lymphocyte
+    file << x[8] << "\n";   // Total Microglia
 }
 
 /* void rk4(double *x, double dt) {

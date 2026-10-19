@@ -18,22 +18,22 @@ void ParametersInitializer21DaysModel() {
     params.citoP = 198.0;      // pg/ml                // basal pro-inflamatory cytokine concentration
     params.citoA = 392.0;      // pg/ml                // basal anti-inflamatory cytokine concentration
     
-    params.tCD4 = 80.0;        // cells/mm²            // basal density of homeostasis CD4+ T cells
-    params.tCD8 = 40.0;        // cells/mm²            // basal density of homeostasis CD8+ T cells
+    params.tHelper = 80.0;        // cells/mm²            // basal density of homeostasis CD4+ T cells
+    params.tEff = 40.0;        // cells/mm²            // basal density of homeostasis CD8+ T cells
     
-    params.alphaTCD4 = 4.5e-1; // CD4+ T cells homeostasis rate
-    params.alphaTCD8 = 2.8e-1; // CD8+ T cells homeostasis rate
+    params.alphaTH = 4.5e-1; // CD4+ T cells homeostasis rate
+    params.alphaTC = 2.8e-1; // CD8+ T cells homeostasis rate
 
-    params.betaTCD4 = 2.5e-1;  // CD4+ T cells proliferation rate
-    params.betaTCD8 = 1.7e-1;  // CD8+ T cells proliferation rate
+    params.betaTH = 3.5e-1;  // CD4+ T cells proliferation rate
+    params.betaTC = 1.7e-1;  // CD8+ T cells proliferation rate
 
-    params.kappaTCD4 = 1.6e-2; // CD4+ T cells decay rate
-    params.kappaTCD8 = 6.5e-3; // CD8+ T cells decay rate
+    params.kappaTH = 1.6e-2; // CD4+ T cells decay rate
+    params.kappaTC = 6.5e-3; // CD8+ T cells decay rate
 
-    params.rhoTCD4 = 1.6;   // CD4+ T cells anti-inflamatory cytokine production rate
-    params.rhoTCD8 = 2.0;    // CD8+ T cells pró-inflamatory cytokine production rate
+    params.rhoTH = 1.6;   // CD4+ T cells anti-inflamatory cytokine production rate
+    params.rhoTC = 2.0;    // CD8+ T cells pró-inflamatory cytokine production rate
 
-    params.gammaTCD8 = 1.0e-1; // CD8+ T cells oligodendrocyte damage rate
+    params.gammaTC = 1.0e-1; // CD8+ T cells oligodendrocyte damage rate
 
     params.MOG = true;         // microglia activation threshold
     params.epsilon = 0.0;      // treatment efficacy
@@ -47,8 +47,8 @@ int main() {
     double t_final = 150.0;  // FINAL TIME (DAYS)
 
     // INITIAL CONDITIONS
-    //     x[6]       = {MB[0], MA[0], O[0], CP[0], CA[0], TH[0], TC[0], MT[0]}
-    double x[NUM_VAR] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, 0.0, 0.0, params.microglia};
+    //     x[6]       = {MB[0], MA[0], O[0], CP[0], CA[0], TH[0], TC[0], TR[0], MT[0]}
+    double x[NUM_VAR] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, 0.0, 0.0, 0.0, params.microglia};
 
     string fileName = "dadosModelo.csv"; // OUTPUT FILE NAME
     solveModel(x, dt, t_final, fileName);

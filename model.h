@@ -1,6 +1,6 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
-#define NUM_VAR 8
+#define NUM_VAR 9
 
 #include <iostream>
 #include <string>
@@ -22,22 +22,22 @@ struct parameters {
     double citoP;
     double citoA;
 
-    double tCD4;      // basal density of CD4+ T cells
-    double tCD8;      // basal density of CD8+ T cells
+    double tHelper; // basal density of CD4+ T cells
+    double tEff;    // basal density of CD8+ T cells
     
-    double alphaTCD4; // CD4+ T cells homeostasis rate
-    double alphaTCD8;  // CD8+ T cells homeostasis rate
+    double alphaTH; // CD4+ T cells homeostasis rate
+    double alphaTC; // CD8+ T cells homeostasis rate
 
-    double betaTCD4;  // CD4+ T cells proliferation rate
-    double betaTCD8;  // CD8+ T cells proliferation rate
+    double betaTH;  // CD4+ T cells proliferation rate
+    double betaTC;  // CD8+ T cells proliferation rate
 
-    double kappaTCD4; // CD4+ T cells decay rate
-    double kappaTCD8; // CD8+ T cells decay rate
+    double kappaTH; // CD4+ T cells decay rate
+    double kappaTC; // CD8+ T cells decay rate
 
-    double rhoTCD4;   // CD4+ T cells anti-inflamatory cytokine production rate
-    double rhoTCD8;   // CD8+ T cells pró-inflamatory cytokine production rate
+    double rhoTH;   // CD4+ T cells anti-inflamatory cytokine production rate
+    double rhoTC;   // CD8+ T cells pró-inflamatory cytokine production rate
 
-    double gammaTCD8; // CD8+ T cells oligodendrocyte damage rate
+    double gammaTC; // CD8+ T cells oligodendrocyte damage rate
 
 
     double MOG;       // microglia activation threshold

@@ -11,7 +11,7 @@ plt.rcParams.update({
 
 # Função para plotar os picos de cada função
 def printPicos():
-    colunas = ['Tempo', 'Micróglia Basal', 'Células Iba-1+', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'Micróglias Totais', 'T CD4+', 'T CD8+']
+    colunas = ['Tempo', 'Micróglia Basal', 'Células Iba-1+', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'T Helper', 'T Cytotoxic', 'T Regulatory', 'Micróglias Totais']
     
     try:
         df_local = pd.read_csv(arquivo, sep=r',', header=0, names=colunas)
@@ -32,9 +32,10 @@ def printPicos():
     oligodendrocitos = df_local['Oligodendrócitos'].to_numpy()
     citocinaPro = df_local['Citocinas Pró-Inflamatórias'].to_numpy()
     citocinaAnti = df_local['Citocinas Anti-Inflamatórias'].to_numpy()
+    tHelp = df_local['T Helper'].to_numpy()
+    tCytotoxic = df_local['T Cytotoxic'].to_numpy()
+    treg = df_local['T Regulatory'].to_numpy()
     microgliasTotais = df_local['Micróglias Totais'].to_numpy()
-    tcd4 = df_local['T CD4+'].to_numpy()
-    tcd8 = df_local['T CD8+'].to_numpy()
 
     # Microglia Basal
     valorPico = np.max(microgliaBasal)
@@ -72,17 +73,23 @@ def printPicos():
     tempoPico = tempo[indicePico]
     print(f"Microglia Total: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
 
-    # T CD4+
-    valorPico = np.max(tcd4)
-    indicePico = np.argmax(tcd4)
+    # T Helper
+    valorPico = np.max(tHelp)
+    indicePico = np.argmax(tHelp)
     tempoPico = tempo[indicePico]
-    print(f"T CD4+: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
+    print(f"T Helper: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
 
-    # T CD8+
-    valorPico = np.max(tcd8)
-    indicePico = np.argmax(tcd8)
+    # T Cytotoxic
+    valorPico = np.max(tCytotoxic)
+    indicePico = np.argmax(tCytotoxic)
     tempoPico = tempo[indicePico]
-    print(f"T CD8+: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
+    print(f"T Cytotoxic: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
+
+    # T Regulatory
+    valorPico = np.max(treg)
+    indicePico = np.argmax(treg)
+    tempoPico = tempo[indicePico]
+    print(f"T Regulatory: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
 
 # Função para plotar os marcadores de 21 dias
 def plotMarkers(ax):
@@ -91,7 +98,7 @@ def plotMarkers(ax):
 
 # Função para plotar os gráficos
 def plotModel(arquivo):
-    colunas = ['Tempo', 'Micróglia Basal', 'Microglia Ativada', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'T CD4+', 'T CD8+', 'Microglia Total']
+    colunas = ['Tempo', 'Micróglia Basal', 'Microglia Ativada', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'T Helper', 'T Cytotoxic', 'T Regulatory', 'Micróglias Totais']
     
     try:
         df_local = pd.read_csv(arquivo, sep=r',', header=0, names=colunas)
@@ -129,11 +136,14 @@ def plotModel(arquivo):
 
 
 
-    # Plota os linfócitos T CD4+
-    ax[1].plot(df_local['Tempo'], df_local['T CD4+'], label='T CD4+', linewidth=3, color = 'darkcyan')
+    # Plota os linfócitos T Helper
+    ax[1].plot(df_local['Tempo'], df_local['T Helper'], label='T Helper', linewidth=3, color = 'darkcyan')
 
-    # Plota os linfócitos T CD8+
-    ax[1].plot(df_local['Tempo'], df_local['T CD8+'], label='T CD8+', linewidth=3, color = 'crimson')
+    # Plota os linfócitos T Cytotoxic
+    ax[1].plot(df_local['Tempo'], df_local['T Cytotoxic'], label='T Cytotoxic', linewidth=3, color = 'crimson')
+
+    # Plota os linfócitos T Cytotoxic
+    ax[1].plot(df_local['Tempo'], df_local['T Regulatory'], label='T Regulatory', linewidth=3)
 
     # Configurações Visuais
     ax[1].set_title('Density of T lymphocytes', fontsize = 13)
