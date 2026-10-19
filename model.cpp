@@ -48,8 +48,9 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     double O  = current_x[2];  // O  = density of oligodendrocytes (cells/mm²)
     double CP = current_x[3];  // CP = concentration of pro-inflamatory cytokines (pg/ml)
     double CA = current_x[4];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
-    double TH = current_x[5];  // TH = density of CD4+ T cells () 
-    double TC = current_x[6];  // TC = density of CD8+ T cells ()
+    double TH = current_x[5];  // TH = density of helper T cells () 
+    double TC = current_x[6];  // TC = density of cytotoxic T cells ()
+    double TR = current_x[7];  // TR = density of regulatory T cells
 
     bool MOG = params.MOG; // MOG = microglia activation threshold (true or false)
 
@@ -63,19 +64,19 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     dxdt[2] = params.rho * O * (1 - O/params.oligod) - params.gamma * MA - params.gammaTC * TC; 
 
     //pro-inflamatory cytokines
-    dxdt[3] = MOG * (params.rhoTC * TH - params.alpha * CP);
+    dxdt[3] = MOG * (params.rhoCP * TH - params.alpha * CP);
     
     //anti-inflamatory cytokines
-    dxdt[4] = MOG * (params.rhoTH * TH - params.kappa * CA);
+    dxdt[4] = MOG * (params.rhoCA * TH - params.kappa * CA);
 
     //T helper lymphocyte
-    dxdt[5] = params.alphaTH * (params.tHelper - TH) + params.betaTH * TH - params.kappaTH * CA;
+    dxdt[5] = params.alphaTH * (params.tHelper - TH) + params.betaTH * TH - params.kappaTH * TR;
     
     //T cytotoxic lymphocyte
-    dxdt[6] = params.alphaTC * (params.tEff - TC) + params.betaTC * TC - params.kappaTC * CA;
+    dxdt[6] = params.alphaTC * (params.tCytotoxic - TC) + params.betaTC * TC - params.kappaTC * TR;
 
     //T regulatory lymphocyte
-    dxdt[7] = 0;
+    dxdt[7] = params.betaTR * (TC + TH) - params.kappaTR * CA;
 }
 
 void writeFile(double *x, double t, ofstream &file) {

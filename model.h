@@ -13,7 +13,7 @@ struct parameters {
     double delta;     // production rate of basal microglia
     double lambda;    // production rate of microglia    
     double ni;        // microglia decay rate                 
-    double rho;         // production rate of oligodendrocyte
+    double rho;       // production rate of oligodendrocyte
     double gamma;     // pro-inflamatory cytokine-induced oligodendrocyte damage
     double beta;      // cytokine production rate per microglia       
     double alpha;     // pro-inflamatory cytokine decay rate                       
@@ -22,22 +22,24 @@ struct parameters {
     double citoP;
     double citoA;
 
-    double tHelper; // basal density of CD4+ T cells
-    double tEff;    // basal density of CD8+ T cells
+    double tHelper;       // basal density of Helper T cells
+    double tCytotoxic;    // basal density of Cytotoxic T cells
     
-    double alphaTH; // CD4+ T cells homeostasis rate
-    double alphaTC; // CD8+ T cells homeostasis rate
+    double alphaTH; // Helper T cells homeostasis rate
+    double alphaTC; // Cytotoxic T cells homeostasis rate
 
-    double betaTH;  // CD4+ T cells proliferation rate
-    double betaTC;  // CD8+ T cells proliferation rate
+    double betaTH;  // Helper T cells proliferation rate
+    double betaTC;  // Cytotoxic T cells proliferation rate
+    double betaTR;
 
-    double kappaTH; // CD4+ T cells decay rate
-    double kappaTC; // CD8+ T cells decay rate
+    double kappaTH; // Helper T cells decay rate
+    double kappaTC; // Cytotoxic T cells decay rate
+    double kappaTR; // Regulatory T cells decay rate
 
-    double rhoTH;   // CD4+ T cells anti-inflamatory cytokine production rate
-    double rhoTC;   // CD8+ T cells pró-inflamatory cytokine production rate
+    double rhoCA;   // Helper T cells anti-inflamatory cytokine production rate
+    double rhoCP;   // Cytotoxic T cells pró-inflamatory cytokine production rate
 
-    double gammaTC; // CD8+ T cells oligodendrocyte damage rate
+    double gammaTC; // Cytotoxic T cells oligodendrocyte damage rate
 
 
     double MOG;       // microglia activation threshold

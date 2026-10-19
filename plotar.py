@@ -132,7 +132,7 @@ def plotModel(arquivo):
     ax[0].grid(True) 
     ax[0].legend(fontsize = 10, loc = 'upper right') 
     ax[0].tick_params(labelsize = 12)
-    ax[0].set_ylim(-20, 450)
+    # ax[0].set_ylim(-20, 450)
 
 
 
@@ -152,7 +152,7 @@ def plotModel(arquivo):
     ax[1].grid(True) 
     ax[1].legend(fontsize = 10, loc = 'upper right') 
     ax[1].tick_params(labelsize = 12)
-    ax[1].set_ylim(-100, 2000)
+    # ax[1].set_ylim(-100, 2000)
     plt.tight_layout()
     plt.savefig('modelo.jpg')
 
@@ -173,7 +173,7 @@ def plotModel(arquivo):
     ax[2].grid(True) 
     ax[2].legend(fontsize = 10, loc = 'upper right') 
     ax[2].tick_params(labelsize = 12)
-    ax[2].set_ylim(-100, 2000)
+    # ax[2].set_ylim(-100, 2000)
     plt.tight_layout()
     plt.savefig('modelo.jpg')
 
