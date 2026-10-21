@@ -111,7 +111,7 @@ def plotModel(arquivo):
         print(f"Erro ao ler o arquivo2: {e}")
         exit()
 
-    fig, ax = plt.subplots(1,3, figsize = (12, 5))
+    fig, ax = plt.subplots(1,3, figsize = (18, 6))
 
     # Plota a Microglia basal
     ax[0].plot(df_local['Tempo'], df_local['Micróglia Basal'], label='Basal Microglia', linewidth=3, color = 'tab:purple')
@@ -137,13 +137,13 @@ def plotModel(arquivo):
 
 
     # Plota os linfócitos T Helper
-    ax[1].plot(df_local['Tempo'], df_local['T Helper'], label='T Helper', linewidth=3, color = 'darkcyan')
+    ax[1].plot(df_local['Tempo'], df_local['T Helper'], label='T Helper', linewidth=3, color = 'steelblue')
 
     # Plota os linfócitos T Cytotoxic
     ax[1].plot(df_local['Tempo'], df_local['T Cytotoxic'], label='T Cytotoxic', linewidth=3, color = 'crimson')
 
     # Plota os linfócitos T Cytotoxic
-    ax[1].plot(df_local['Tempo'], df_local['T Regulatory'], label='T Regulatory', linewidth=3)
+    ax[1].plot(df_local['Tempo'], df_local['T Regulatory'], label='T Regulatory', linewidth=3, color = 'black')
 
     # Configurações Visuais
     ax[1].set_title('Density of T lymphocytes', fontsize = 13)
