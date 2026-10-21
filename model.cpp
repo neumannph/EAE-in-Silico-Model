@@ -76,7 +76,7 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     dxdt[6] = params.alphaTC * (params.tCytotoxic - TC) + params.betaTC * TC - params.kappaTC * TR;
 
     //T regulatory lymphocyte
-    dxdt[7] = params.betaTR * TC - params.kappaTR * CA;
+    dxdt[7] = params.betaTR * TC;// - params.kappaTR * CA;
 }
 
 void writeFile(double *x, double t, ofstream &file) {

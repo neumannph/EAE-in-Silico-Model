@@ -25,12 +25,12 @@ void ParametersInitializer21DaysModel() {
     params.alphaTC = 2.8e-1; // Cytotoxic T cells homeostasis rate
 
     params.betaTH = 6.0e-1;  // Helper T cells proliferation rate
-    params.betaTC = 3.7e-1;  // Cytotoxic T cells proliferation rate
+    params.betaTC = 3.9e-1;  // Cytotoxic T cells proliferation rate
     params.betaTR = 6.0e-1;  // Regulatory T cells proliferation rate
 
-    params.kappaTH = 7.8e-2; // Helper T cells decay rate
-    params.kappaTC = 2.0e-2; // Cytotoxic T cells decay rate
-    params.kappaTR = 1.3e-1; // Regulatory T cells decay rate
+    params.kappaTH = 7.8e-3; // Helper T cells decay rate
+    params.kappaTC = 5.0e-2; // Cytotoxic T cells decay rate
+    params.kappaTR = 9.0e-3; // Regulatory T cells decay rate
 
     params.rhoCA = 4.4e-1;    // Helper T cells anti-inflamatory cytokine production rate
     params.rhoCP = 2.0e-1;    // Cytotoxic T cells pró-inflamatory cytokine production rate    
