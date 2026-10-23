@@ -48,8 +48,8 @@ void calculateDerivatives(double *current_x, double *dxdt) {
     double O  = current_x[2];  // O  = density of oligodendrocytes (cells/mm²)
     double CP = current_x[3];  // CP = concentration of pro-inflamatory cytokines (pg/ml)
     double CA = current_x[4];  // CA = concentration of anti-inflamatory cytokines (pg/ml)
-    double TH = current_x[5];  // TH = density of CD4+ T cells () 
-    double TC = current_x[6];  // TC = density of CD8+ T cells ()
+    double TH = current_x[5];  // TH = density of CD4+ T cells (cells/mm²) 
+    double TC = current_x[6];  // TC = density of CD8+ T cells (cells/mm²)
 
     bool MOG = params.MOG; // MOG = microglia activation threshold (true or false)
 

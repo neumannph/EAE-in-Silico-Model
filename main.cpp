@@ -12,7 +12,7 @@ void ParametersInitializer21DaysModel() {
     params.rho = 6.5e-1;       // dia^-1               // production rate of oligodendrocyte
     params.gamma = 2.0e-1;     // cells*ml/mm²*pg*dia  // pro-inflamatory cytokine-induced oligodendrocyte damage 
     params.beta = 3.9e-1;      // pg*mm²/ml*cells*dia  // pro-inflamatory cytokine production rate per microglia               
-    params.alpha = 6.2e-1;     // dia^-1               // pro-inflamatory cytokine decay rate                                  
+    params.alpha = 3.4e-1;     // dia^-1               // pro-inflamatory cytokine decay rate                                  
     params.mi = 7.9e-1;        // dia^-1               // anti-inflamatory cytokine production rate 
     params.kappa = 4.5e-2;     // dia^-1               // anti-inflamatory cytokine decay rate 
     params.citoP = 198.0;      // pg/ml                // basal pro-inflamatory cytokine concentration
@@ -22,18 +22,18 @@ void ParametersInitializer21DaysModel() {
     params.tCD8 = 40.0;        // cells/mm²            // basal density of homeostasis CD8+ T cells
     
     params.alphaTCD4 = 4.5e-1; // CD4+ T cells homeostasis rate
-    params.alphaTCD8 = 2.8e-1; // CD8+ T cells homeostasis rate
+    params.alphaTCD8 = 3.0e-1; // CD8+ T cells homeostasis rate
 
     params.betaTCD4 = 2.5e-1;  // CD4+ T cells proliferation rate
-    params.betaTCD8 = 1.7e-1;  // CD8+ T cells proliferation rate
+    params.betaTCD8 = 3.0e-1;  // CD8+ T cells proliferation rate
 
     params.kappaTCD4 = 1.6e-2; // CD4+ T cells decay rate
-    params.kappaTCD8 = 6.5e-3; // CD8+ T cells decay rate
+    params.kappaTCD8 = 7.3e-3; // CD8+ T cells decay rate
 
     params.rhoTCD4 = 1.6;   // CD4+ T cells anti-inflamatory cytokine production rate
-    params.rhoTCD8 = 2.0;    // CD8+ T cells pró-inflamatory cytokine production rate
+    params.rhoTCD8 = 4.0;    // CD8+ T cells pró-inflamatory cytokine production rate
 
-    params.gammaTCD8 = 1.0e-1; // CD8+ T cells oligodendrocyte damage rate
+    params.gammaTCD8 = 1.0e-2; // CD8+ T cells oligodendrocyte damage rate
 
     params.MOG = true;         // microglia activation threshold
     params.epsilon = 0.0;      // treatment efficacy
@@ -44,7 +44,7 @@ int main() {
     ParametersInitializer21DaysModel();
 
     double dt = 0.01;       // TIME STEP (DAYS)
-    double t_final = 150.0;  // FINAL TIME (DAYS)
+    double t_final = 30.0;  // FINAL TIME (DAYS)
 
     // INITIAL CONDITIONS
     //     x[6]       = {MB[0], MA[0], O[0], CP[0], CA[0], TH[0], TC[0], MT[0]}

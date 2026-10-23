@@ -12,7 +12,7 @@ plt.rcParams.update({
 
 # Função para plotar os picos de cada função
 def printPicos():
-    colunas = ['Tempo', 'Micróglia Basal', 'Células Iba-1+', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'Micróglias Totais', 'T CD4+', 'T CD8+']
+    colunas = ['Tempo', 'Micróglia Homeostatica', 'Células Iba-1+', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'Micróglias Totais', 'T CD4+', 'T CD8+']
     
     try:
         df_local = pd.read_csv(arquivo, sep=r',', header=0, names=colunas)
@@ -28,7 +28,7 @@ def printPicos():
 
 
     tempo = df_local['Tempo'].to_numpy()
-    microgliaBasal = df_local['Micróglia Basal'].to_numpy()
+    microgliaHomeostatica = df_local['Micróglia Homeostatica'].to_numpy()
     celulasIba1 = df_local['Células Iba-1+'].to_numpy()
     oligodendrocitos = df_local['Oligodendrócitos'].to_numpy()
     citocinaPro = df_local['Citocinas Pró-Inflamatórias'].to_numpy()
@@ -37,11 +37,11 @@ def printPicos():
     tcd4 = df_local['T CD4+'].to_numpy()
     tcd8 = df_local['T CD8+'].to_numpy()
 
-    # Microglia Basal
-    valorPico = np.max(microgliaBasal)
-    indicePico = np.argmax(microgliaBasal)
+    # Microglia Homeostatica
+    valorPico = np.max(microgliaHomeostatica)
+    indicePico = np.argmax(microgliaHomeostatica)
     tempoPico = tempo[indicePico]
-    print(f"Microglia Basal: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
+    print(f"Microglia Homeostatica: {valorPico} cells/mm² - Tempo: {tempoPico} dias")
 
     # Células Iba-1+
     valorPico = np.max(celulasIba1)
@@ -92,7 +92,7 @@ def plotMarkers(ax):
 
 # Função para plotar os gráficos
 def plotModel(arquivo):
-    colunas = ['Tempo', 'Micróglia Basal', 'Microglia Ativada', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'T CD4+', 'T CD8+', 'Microglia Total']
+    colunas = ['Tempo', 'Micróglia Homeostatica', 'Microglia Ativada', 'Oligodendrócitos', 'Citocinas Pró-Inflamatórias', 'Citocinas Anti-Inflamatórias', 'T CD4+', 'T CD8+', 'Microglia Total']
     
     try:
         df_local = pd.read_csv(arquivo, sep=r',', header=0, names=colunas)
@@ -107,8 +107,8 @@ def plotModel(arquivo):
 
     fig, ax = plt.subplots(1,2, figsize = (12, 5))
 
-    # Plota a Microglia basal
-    ax[0].plot(df_local['Tempo'], df_local['Micróglia Basal'], label='Basal Microglia', linewidth=3, color = 'tab:purple')
+    # Plota a Microglia Homeostatica
+    ax[0].plot(df_local['Tempo'], df_local['Micróglia Homeostatica'], label='Homeostatic Microglia', linewidth=3, color = 'tab:purple')
 
     # Plota a Micróglia Ativada
     ax[0].plot(df_local['Tempo'], df_local['Microglia Ativada'], label='Activated Microglia', linewidth=3, color = 'tab:red')
@@ -126,7 +126,7 @@ def plotModel(arquivo):
     # ax[0].plot(df_local['Tempo'], df_local['Microglia Total'], label ='Total Microglia', linewidth=3, color = 'tab:brown')
 
     # Configurações Visuais
-    ax[0].set_title('Density of basal microglia, activated microglia,\nand oligodendrocytes', fontsize = 13, fontweight='bold')
+    ax[0].set_title('Density of homeostatic microglia, activated microglia,\nand oligodendrocytes', fontsize = 13, fontweight='bold')
     ax[0].set_xlabel('Time (days)', fontsize = 13, fontweight='bold')
     ax[0].set_ylabel('Density (cells/mm²)', fontsize = 13, fontweight='bold')
     ax[0].grid(True) 
