@@ -5,8 +5,8 @@ from scipy.integrate import solve_ivp
 def model (t, y):
     TR, TE = y 
 
-    lambda_E = 1.0e-2
-    lambda_R = 100.0
+    lambda_E = 1.0e-3
+    lambda_R = 1.0e-4
     delta = 1.0 # Antigen presentation 
     ni = 1.0e-2 # Memory
     alpha_E = 1.0 # Maximum Teff proliferation rate
@@ -41,3 +41,4 @@ plt.legend()
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
+plt.savefig('gráfico.jpg')
