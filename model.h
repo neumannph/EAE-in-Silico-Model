@@ -1,6 +1,7 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
-#define NUM_VAR 8
+#define NUM_VAR_M1 4
+#define NUM_VAR_M2 6
 
 #include <iostream>
 #include <string>
@@ -13,7 +14,7 @@ struct parameters {
     double delta;     // production rate of basal microglia
     double lambda;    // production rate of microglia    
     double ni;        // microglia decay rate                 
-    double rho;         // production rate of oligodendrocyte
+    double p;         // production rate of oligodendrocyte
     double gamma;     // pro-inflamatory cytokine-induced oligodendrocyte damage
     double beta;      // cytokine production rate per microglia       
     double alpha;     // pro-inflamatory cytokine decay rate                       
@@ -21,24 +22,6 @@ struct parameters {
     double kappa;     // anti-inflamatory cytokine decay rate   
     double citoP;
     double citoA;
-
-    double tCD4;      // basal density of CD4+ T cells
-    double tCD8;      // basal density of CD8+ T cells
-    
-    double alphaTCD4; // CD4+ T cells homeostasis rate
-    double alphaTCD8;  // CD8+ T cells homeostasis rate
-
-    double betaTCD4;  // CD4+ T cells proliferation rate
-    double betaTCD8;  // CD8+ T cells proliferation rate
-
-    double kappaTCD4; // CD4+ T cells decay rate
-    double kappaTCD8; // CD8+ T cells decay rate
-
-    double rhoTCD4;   // CD4+ T cells anti-inflamatory cytokine production rate
-    double rhoTCD8;   // CD8+ T cells pró-inflamatory cytokine production rate
-
-    double gammaTCD8; // CD8+ T cells oligodendrocyte damage rate
-
 
     double MOG;       // microglia activation threshold
     double epsilon;   // treatment efficacy
