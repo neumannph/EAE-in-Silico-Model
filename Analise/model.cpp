@@ -1,14 +1,15 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <cmath>
 #include "model.h"
 using namespace std;
 
 parameters params;
 
-void solveModel(double *x, double dt, double t_final, const string &file_name) 
+void solveModel(double *x, double dt, double t_final) 
 {
-
+    int step = 0;
     double t = 0.0;
     
     while (t < t_final) 
@@ -16,14 +17,14 @@ void solveModel(double *x, double dt, double t_final, const string &file_name)
         eulerMethod(x, dt);
         x[5] = x[0] + x[1]; 
         t += dt;
+        step++;
+
+        // Grava apenas a cada 100 passos (ex: t = 1.0, 2.0, 3.0...)
+        if (step % 25 == 0) 
+            cout << t << "," << x[0] << "," << x[1] << "," 
+            << x[2] << "," << x[3] << "," << x[4] << "," << x[5] << endl;
     }
-    
-    cout << x[0] << endl;
-    cout << x[1] << endl;
-    cout << x[2] << endl;
-    cout << x[3] << endl;
-    cout << x[4] << endl;
-    cout << x[5] << endl;
+
 }
 
 void eulerMethod(double *x, double dt) 
@@ -54,18 +55,18 @@ void calculateDerivatives(double *current_x, double *dxdt)
 
     bool MOG = params.MOG; // MOG = microglia activation threshold (true or false)
 
-    //basal microglia
+    // basal microglia
     dxdt[0] = params.delta * (params.microglia - MB) - MOG * (1 - params.epsilon) * params.lambda * MB;
     
-    //activated microglia
+    // activated microglia
     dxdt[1] = MOG * ((1 - params.epsilon) * params.lambda * MB - (params.ni * CA));
     
-    //oligodendrocyte
+    // oligodendrocyte
     dxdt[2] = params.p * O * (1 - O/params.oligod) - params.gamma * MA; 
 
-    //pro-inflamatory cytokines
+    // pro-inflamatory cytokines
     dxdt[3] = MOG * (params.beta * MA - params.alpha * CA);
     
-    //anti-inflamatory cytokines
+    // anti-inflamatory cytokines
     dxdt[4] = MOG * (params.mi * CP - params.kappa * CA);
 }

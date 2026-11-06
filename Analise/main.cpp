@@ -11,13 +11,13 @@ void ParametersInitializer21DaysModel(char* argv[]) {
     params.lambda    = 2.3e-1  * atof(argv[4]);
     params.ni        = 2.8e-2  * atof(argv[5]);
     params.p         = 6.5e-1  * atof(argv[6]);
-    params.gamma    = 2.0e-1  * atof(argv[7]);
-    params.beta     = 3.9e-1  * atof(argv[8]);
-    params.alpha    = 6.2e-2  * atof(argv[9]);
-    params.mi       = 7.9e-1  * atof(argv[10]);
-    params.kappa    = 3.6e-1  * atof(argv[11]);
-    params.citoP    = 198.0   * atof(argv[12]);
-    params.citoA    = 392.0   * atof(argv[13]);
+    params.gamma     = 2.0e-1  * atof(argv[7]);
+    params.beta      = 3.9e-1  * atof(argv[8]);
+    params.alpha     = 6.2e-2  * atof(argv[9]);
+    params.mi        = 7.9e-1  * atof(argv[10]);
+    params.kappa     = 3.6e-1  * atof(argv[11]);
+    params.citoP     = 198.0   * atof(argv[12]);
+    params.citoA     = 392.0   * atof(argv[13]);
 
     params.MOG = 1.0;
     params.epsilon = 0.0;
@@ -38,8 +38,7 @@ int main(int argc, char* argv[])
 
     double x[NUM_VAR_M2] = {params.microglia, 0.0, 400.0, params.citoP, params.citoA, params.microglia};
 
-    string fileName = "/dev/null"; 
-    solveModel(x, dt, t_final, fileName);
+    solveModel(x, dt, t_final);
 
     return 0;
 }

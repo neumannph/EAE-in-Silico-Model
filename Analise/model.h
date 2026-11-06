@@ -35,7 +35,7 @@ double signal(double epsilon);
 void eulerMethod(double *x, double dt);
 void rk4(double *x, double dt);
 void calculateDerivatives(double *current_x, double *dxdt);
-void solveModel(double *x, double dt, double t_final, const std::string &file_name);
+void solveModel(double *x, double dt, double t_final);
 void writeFile(double *x, double t, std::ofstream &file);
 void ParametersInitializer21DaysModel(char* argv[]);
 void runEpsilonSweep(double dt, double t_final);
