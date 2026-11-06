@@ -5,8 +5,8 @@ from scipy.integrate import solve_ivp
 def model (t, y):
     TR, TE = y 
 
-    lambda_E = 1.0e-3
-    lambda_R = 1.0e-4
+    lambda_E = 27.397
+    lambda_R = 27.397
     delta = 1.0 # Antigen presentation 
     ni = 1.0e-2 # Memory
     alpha_E = 1.0 # Maximum Teff proliferation rate
@@ -23,7 +23,7 @@ def model (t, y):
     return [dTE_dt, dTR_dt]
 
 y0 = [1000.0, 200.0]  # Initial conditions for TR and TE
-t_span = (0, 100)  # Time span for the simulation
+t_span = (0, 300)  # Time span for the simulation
 
 t_eval = np.linspace(t_span[0], t_span[1], 1000)
 
