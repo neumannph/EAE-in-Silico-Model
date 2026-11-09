@@ -5,8 +5,8 @@ from scipy.integrate import solve_ivp
 def model (t, y):
     TR, TE = y 
 
-    lambda_E = 27.397
-    lambda_R = 27.397
+    lambda_E = 1.0
+    lambda_R = 1.0
     delta = 1.0 # Antigen presentation 
     ni = 1.0e-2 # Memory
     alpha_E = 1.0 # Maximum Teff proliferation rate
