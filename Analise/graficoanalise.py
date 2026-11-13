@@ -11,7 +11,7 @@ problem = {
 }
 
 nomes_saidas = [
-    'Micróglia Basal',
+    'Micróglia Homeostática',
     'Micróglia Ativa',
     'Oligodendrócitos',
     'Citocinas Pro',

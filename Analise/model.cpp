@@ -20,7 +20,7 @@ void solveModel(double *x, double dt, double t_final)
         step++;
 
         // Grava apenas a cada 100 passos (ex: t = 1.0, 2.0, 3.0...)
-        if (step % 25 == 0) 
+        if (step % 50 == 0) 
             cout << t << "," << x[0] << "," << x[1] << "," 
             << x[2] << "," << x[3] << "," << x[4] << "," << x[5] << endl;
     }
